@@ -1,0 +1,12 @@
+# xcode
+*.mode1v3
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.pyc
+*~.nib/
+build/*
+
+# osx
+.DS_Store
+profile
