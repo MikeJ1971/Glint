@@ -15,6 +15,7 @@
     IBOutlet NSButton *runQueryButton;
     IBOutlet NSTextView *queryTextView;
     IBOutlet NSTextView *resultsTextView;
+    IBOutlet NSPopUpButton *resultsFormat;
 
 }
 
@@ -22,6 +23,7 @@
 @property(retain,nonatomic) IBOutlet NSButton *runQueryButton;
 @property(retain,nonatomic) IBOutlet NSTextView *queryTextView;
 @property(retain,nonatomic) IBOutlet NSTextView *resultsTextView;
+@property(retain,nonatomic) IBOutlet NSPopUpButton *resultsFormat;
 
 - (IBAction)runquery:(id)sender;
 

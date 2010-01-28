@@ -15,6 +15,7 @@
 @synthesize runQueryButton;
 @synthesize queryTextView;
 @synthesize resultsTextView;
+@synthesize resultsFormat;
 
 - (IBAction)runquery:(id)sender {
     
@@ -29,8 +30,6 @@
         return;
     }
 
-    NSLog(@"We have the endpoint: %@", endPoint);
-
     
     // ----- Get the SPARQL query
     
@@ -42,20 +41,35 @@
         // TODO provide visual feedback that an sparql is needed
         return;
     }
-    
-    NSLog(@"We have the sparql query: %@", sparql);
 
+    
+    NSString *accept;
+        
+    if ([[resultsFormat titleOfSelectedItem] isEqualToString:@"JSON"]) {
+        accept = @"application/sparql-results+json";
+    } else {
+        accept = @"application/sparql-results+xml";
+    }
+    
     
     // ----- Create the request
-
-    NSString *urlString = [NSString stringWithFormat:@"%@?query=%@", endPoint,
-                           [sparql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [NSURL URLWithString:endPoint];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
                                          timeoutInterval:60];
+
+    NSString *query = [NSString stringWithFormat:@"query=%@",
+                       [sparql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSData *data = [query dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:[NSString stringWithFormat:@"%d",
+                       [query length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];  
+    [request setValue:accept forHTTPHeaderField:@"accept"];
+    [request setHTTPBody:data];
 
     // ----- Get the response
     
@@ -74,8 +88,6 @@
     }
     
     NSString *responseString = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Response:\n%@", responseString);
     
     [resultsTextView setString:responseString];
     
