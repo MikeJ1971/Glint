@@ -7,21 +7,40 @@
 //
 
 #import "AppController.h"
-
+#import "EndPoint.h"
 
 @implementation AppController
 
-@synthesize sparqlEndPointField;
-@synthesize runQueryButton;
+@synthesize sparqlEndPointList;
 @synthesize queryTextView;
 @synthesize resultsTextView;
 @synthesize resultsFormat;
+@synthesize runQueryButton;
+
+- (id)init {
+    
+    if (![super init]) {
+        return nil;
+    }
+
+    EndPoint *endPoint = [[EndPoint alloc] init];
+    endPoint.endPointURL = @"http://services.data.gov.uk/analytics/sparql";
+    
+    endPointList = [[NSMutableArray alloc] init];
+    [endPointList addObject:endPoint];
+    [endPoint release];
+    
+    [sparqlEndPointList setDataSource:self];
+    
+    return self;
+}
+
 
 - (IBAction)runquery:(id)sender {
     
     // ----- Get the URL of the endpoint
     
-    NSString *endPoint = [sparqlEndPointField stringValue];
+    NSString *endPoint = @"http://services.data.gov.uk/analytics/sparql";
     
     // check that the endpoint has a value
     if ([endPoint length] == 0) {
@@ -91,6 +110,25 @@
     
     [resultsTextView setString:responseString];
     
+}
+
+- (int)numberOfRowsInTableView:(NSTableView *)tableView {
+    
+    NSLog(@"%d endpoints listed", [endPointList count]);
+    
+    return [endPointList count];
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
+            row:(int)row {
+    
+    EndPoint *endPoint = [endPointList objectAtIndex:row];
+    NSLog(@"Endpoint: %@", endPoint.endPointURL);
+    return endPoint.endPointURL;
+}
+- (void)dealloc {
+    [super dealloc];
+    [endPointList release];
 }
 
 @end

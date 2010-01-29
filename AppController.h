@@ -9,22 +9,27 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface AppController : NSObject {
-    
-    IBOutlet NSTextField *sparqlEndPointField;
-    IBOutlet NSButton *runQueryButton;
-    IBOutlet NSTextView *queryTextView;
-    IBOutlet NSTextView *resultsTextView;
-    IBOutlet NSPopUpButton *resultsFormat;
+@interface AppController : NSObject <NSTableViewDataSource> {
 
+    IBOutlet NSTableView *sparqlEndPointList;           // holds the list of endpoints
+    IBOutlet NSTextView *queryTextView;                 // view for typing in the SPARQL query
+    IBOutlet NSTextView *resultsTextView;               // view for displaying results
+    IBOutlet NSPopUpButton *resultsFormat;              // list of formats to get results
+    IBOutlet NSButton *runQueryButton;                  // fires the SPARQL query
+    
+    NSMutableArray *endPointList;
 }
 
-@property(retain,nonatomic) IBOutlet NSTextField *sparqlEndPointField;
-@property(retain,nonatomic) IBOutlet NSButton *runQueryButton;
+@property(retain,nonatomic) IBOutlet NSTableView *sparqlEndPointList;
 @property(retain,nonatomic) IBOutlet NSTextView *queryTextView;
 @property(retain,nonatomic) IBOutlet NSTextView *resultsTextView;
 @property(retain,nonatomic) IBOutlet NSPopUpButton *resultsFormat;
+@property(retain,nonatomic) IBOutlet NSButton *runQueryButton;
 
 - (IBAction)runquery:(id)sender;
+
+- (int)numberOfRowsInTableView:(NSTableView *)tableView;
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
+            row:(int)row;
 
 @end
