@@ -11,16 +11,18 @@
 
 @interface AppController : NSObject <NSTableViewDataSource> {
 
-    IBOutlet NSTableView *sparqlEndPointList;           // holds the list of endpoints
-    IBOutlet NSTextView *queryTextView;                 // view for typing in the SPARQL query
-    IBOutlet NSTextView *resultsTextView;               // view for displaying results
-    IBOutlet NSPopUpButton *resultsFormat;              // list of formats to get results
-    IBOutlet NSButton *runQueryButton;                  // fires the SPARQL query
+    IBOutlet NSTableView *endPointListTableView;    // displays registered endpoints
+    IBOutlet NSTextView *queryTextView;             // view for typing in the SPARQL query
+    IBOutlet NSTextView *resultsTextView;           // view for displaying results
+    IBOutlet NSPopUpButton *resultsFormat;          // list of formats to get results
+    IBOutlet NSButton *runQueryButton;              // fires the SPARQL query
     
-    NSMutableArray *endPointList;
+    NSString *selectedEndPoint;                     // selected endpoint to query
+    
+    NSMutableArray *endPointList;                   // registered endpoints - dataSource for table
 }
 
-@property(retain,nonatomic) IBOutlet NSTableView *sparqlEndPointList;
+@property(retain,nonatomic) IBOutlet NSTableView *endPointListTableView;
 @property(retain,nonatomic) IBOutlet NSTextView *queryTextView;
 @property(retain,nonatomic) IBOutlet NSTextView *resultsTextView;
 @property(retain,nonatomic) IBOutlet NSPopUpButton *resultsFormat;
@@ -29,7 +31,12 @@
 - (IBAction)runquery:(id)sender;
 
 - (int)numberOfRowsInTableView:(NSTableView *)tableView;
+
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
             row:(int)row;
+
+- (IBAction)addEndpoint:(id)sender;
+
+- (IBAction)removeEndpoint:(id)sender;
 
 @end

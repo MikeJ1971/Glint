@@ -12,5 +12,7 @@
 @implementation EndPoint
 
 @synthesize endPointURL;
+@synthesize queryParamName;
+@synthesize httpMethod;
 
 @end

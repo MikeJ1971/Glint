@@ -12,8 +12,12 @@
 @interface EndPoint : NSObject {
 
     NSString *endPointURL;
+    NSString *queryParamName;
+    NSString *httpMethod;
 }
 
-@property(copy,nonatomic) NSString *endPointURL;
+@property(retain,nonatomic) NSString *endPointURL;
+@property(retain,nonatomic) NSString *queryParamName;
+@property(retain,nonatomic) NSString *httpMethod;
 
 @end
