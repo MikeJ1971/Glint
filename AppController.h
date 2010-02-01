@@ -7,19 +7,21 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AddEndPointController.h"
 
+@interface AppController : NSObject <NSTableViewDataSource, AddEndPointDelegate> {
 
-@interface AppController : NSObject <NSTableViewDataSource> {
-
-    IBOutlet NSTableView *endPointListTableView;    // displays registered endpoints
-    IBOutlet NSTextView *queryTextView;             // view for typing in the SPARQL query
-    IBOutlet NSTextView *resultsTextView;           // view for displaying results
-    IBOutlet NSPopUpButton *resultsFormat;          // list of formats to get results
-    IBOutlet NSButton *runQueryButton;              // fires the SPARQL query
+    NSTableView *endPointListTableView;             // displays registered endpoints
+    NSTextView *queryTextView;                      // view for typing in the SPARQL query
+    NSTextView *resultsTextView;                    // view for displaying results
+    NSPopUpButton *resultsFormat;                   // list of formats to get results
+    NSButton *runQueryButton;                       // fires the SPARQL query
     
-    NSString *selectedEndPoint;                     // selected endpoint to query
+//    NSString *selectedEndPoint;                     // selected endpoint to query
     
     NSMutableArray *endPointList;                   // registered endpoints - dataSource for table
+
+    AddEndPointController *addEndPointController;   // controller for adding endpoints
 }
 
 @property(retain,nonatomic) IBOutlet NSTableView *endPointListTableView;
@@ -38,5 +40,9 @@
 - (IBAction)addEndpoint:(id)sender;
 
 - (IBAction)removeEndpoint:(id)sender;
+
+- (void)saveEndPointList;
+
+- (NSString *)storagePath;
 
 @end

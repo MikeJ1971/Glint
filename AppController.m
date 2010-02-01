@@ -9,6 +9,7 @@
 #import "AppController.h"
 #import "EndPoint.h"
 #import "QueryEndPoint.h"
+#import "AddEndPointController.h"
 
 #define APPLICATION_FORM            @"application/x-www-form-urlencoded"
 #define APPLICATION_RESULTS_JSON    @"application/sparql-results+json";
@@ -31,55 +32,16 @@
         return nil;
     }
 
-    EndPoint *endPoint1 = [[EndPoint alloc] init];
-    endPoint1.endPointURL = @"http://services.data.gov.uk/analytics/sparql";
-    endPoint1.queryParamName = @"query";
-    endPoint1.httpMethod = @"POST";
+    // create the list from the archived objects
+    endPointList = [[NSKeyedUnarchiver unarchiveObjectWithFile:[self storagePath]] retain];
+    
+    // if the list is nil, nothing is saved, so create it
+    if (endPointList == nil) {
+        endPointList = [[NSMutableArray alloc] init];
+    }
 
-    EndPoint *endPoint2 = [[EndPoint alloc] init];
-    endPoint2.endPointURL = @"http://services.data.gov.uk/education/sparql";
-    endPoint2.queryParamName = @"query";
-    endPoint2.httpMethod = @"POST";
-    
-    EndPoint *endPoint3 = [[EndPoint alloc] init];
-    endPoint3.endPointURL = @"http://services.data.gov.uk/environment/sparql";
-    endPoint3.queryParamName = @"query";
-    endPoint3.httpMethod = @"POST";
-    
-    EndPoint *endPoint4 = [[EndPoint alloc] init];
-    endPoint4.endPointURL = @"http://services.data.gov.uk/finance/sparql";
-    endPoint4.queryParamName = @"query";
-    endPoint4.httpMethod = @"POST";
-    
-    EndPoint *endPoint5 = [[EndPoint alloc] init];
-    endPoint5.endPointURL = @"http://services.data.gov.uk/transport/sparql";
-    endPoint5.queryParamName = @"query";
-    endPoint5.httpMethod = @"POST";
-    
-    EndPoint *endPoint6 = [[EndPoint alloc] init];
-    endPoint6.endPointURL = @"http://services.data.gov.uk/notices/sparql";
-    endPoint6.queryParamName = @"query";
-    endPoint6.httpMethod = @"POST";
-    
-    
-    endPointList = [[NSMutableArray alloc] init];
-    [endPointList addObject:endPoint1];
-    [endPointList addObject:endPoint2];
-    [endPointList addObject:endPoint3];
-    [endPointList addObject:endPoint4];
-    [endPointList addObject:endPoint5];
-    [endPointList addObject:endPoint6];
-    
-    [endPoint1 release];
-    [endPoint2 release];
-    [endPoint3 release];
-    [endPoint4 release];
-    [endPoint5 release];
-    [endPoint6 release];
-    
+    // display the list in the table
     [endPointListTableView setDataSource:self];
-    
-    selectedEndPoint = [[NSString alloc] init];
     
     return self;
 }
@@ -141,7 +103,15 @@
 
 - (IBAction)addEndpoint:(id)sender {
     
-    NSLog(@"Should add something ...");
+    if (!addEndPointController) {
+        NSLog(@"Creating controller");
+        addEndPointController = [[AddEndPointController alloc] init];
+        [addEndPointController setDelegate:self];
+    }
+    
+    NSLog(@"Display the window");
+    [addEndPointController showWindow:self];
+    
 }
 
 - (IBAction)removeEndpoint:(id)sender {
@@ -152,13 +122,46 @@
         NSLog(@"selected row to remove: %d", [endPointListTableView selectedRow]);
         [endPointList removeObjectAtIndex:[endPointListTableView selectedRow]];
         [endPointListTableView reloadData];
+        [self saveEndPointList];
     }
     
+}
+
+-(void)addEndPoint:(EndPoint *)endPoint {
+    
+    [endPointList addObject:endPoint];
+    [endPointListTableView reloadData];
+    [self saveEndPointList];
+}
+
+- (void)saveEndPointList {
+
+    // save to disk
+
+    BOOL result = [NSKeyedArchiver archiveRootObject:endPointList
+                                              toFile:[self storagePath]];
+    if (result == YES) {
+        NSLog(@"Successfully saved endpoints");
+    } else {
+        NSLog(@"Failed to save endpoints");
+    }
+    
+}
+
+- (NSString *)storagePath {
+
+    // calculate the paths ...
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	return [documentsDirectory stringByAppendingPathComponent:@"LinkedDataViewer.bin"];
 }
 
 - (void)dealloc {
     [super dealloc];
     [endPointList release];
+    [addEndPointController release];
 }
 
 @end
