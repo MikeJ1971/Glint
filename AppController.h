@@ -11,6 +11,8 @@
 
 @interface AppController : NSObject <NSTableViewDataSource, AddEndPointDelegate> {
 
+    IBOutlet NSWindow *mainWindow;
+
     NSTableView *endPointListTableView;             // displays registered endpoints
     NSTextView *queryTextView;                      // view for typing in the SPARQL query
     NSTextView *resultsTextView;                    // view for displaying results
@@ -44,5 +46,7 @@
 - (void)saveEndPointList;
 
 - (NSString *)storagePath;
+
+- (void)handleMainWindow:(id)sender;
 
 @end

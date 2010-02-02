@@ -18,6 +18,8 @@
 #define CONTENT_TYPE                @"Content-Type"
 #define HEADER_ACCEPT               @"accept"
 
+#define MAIN_WINDOW_MENU_ITEM_TAG   200
+
 @implementation AppController
 
 @synthesize endPointListTableView;
@@ -156,6 +158,23 @@
                                                          NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	return [documentsDirectory stringByAppendingPathComponent:@"LinkedDataViewer.bin"];
+}
+
+- (void)handleMainWindow:(id)sender {
+
+    if (![mainWindow isVisible]) {
+        [mainWindow makeKeyAndOrderFront:self];
+    }
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)item {
+
+    // toggle the menu item for opening / closing the main window
+    if ([item tag] == MAIN_WINDOW_MENU_ITEM_TAG) {
+        return ![mainWindow isVisible];
+    }
+
+    return TRUE;
 }
 
 - (void)dealloc {
