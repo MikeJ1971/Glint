@@ -11,6 +11,6 @@
 
 @protocol AddEndPointDelegate
 
--(void)addEndPoint:(EndPoint *)endPoint;
+- (void)addEndPointToArrayList:(EndPoint *)endPoint;
 
 @end

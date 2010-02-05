@@ -27,6 +27,8 @@
 @synthesize resultsTextView;
 @synthesize resultsFormat;
 @synthesize runQueryButton;
+@synthesize progressIndicator;
+@synthesize urlIndicator;
 
 - (id)init {
     
@@ -48,6 +50,17 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    
+    // make sure that the first endpoint in the list is selected by default
+    if ([endPointList count] > 0) {
+        NSIndexSet *defaultIndex = [[NSIndexSet alloc] initWithIndex:0];
+        [endPointListTableView selectRowIndexes:defaultIndex byExtendingSelection:NO];
+        [endPointListTableView scrollRowToVisible:0];
+        [defaultIndex release];
+    }
+    
+}
 
 - (IBAction)runquery:(id)sender {
     
@@ -80,27 +93,19 @@
         // TODO provide visual feedback that an sparql is needed
         return;
     }
-    
+
+    [progressIndicator startAnimation:self];
+    //[urlIndicator setStringValue:[NSString stringWithFormat:@"Querying %@", [endPoint endPointURL]]];
+
     QueryEndPoint *query = [[QueryEndPoint alloc] init];
     NSString *results = [query queryEndPoint:endPoint withSparql:sparql 
                                resultsFormat:[resultsFormat titleOfSelectedItem]];
     [resultsTextView setString:results];
+    //[urlIndicator setStringValue:@""];
+    [progressIndicator stopAnimation:self];
     
     [query release];
     
-}
-
-- (int)numberOfRowsInTableView:(NSTableView *)tableView {
-    
-    NSLog(@"%d endpoints listed", [endPointList count]);
-    return [endPointList count];
-}
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
-            row:(int)row {
-    
-    EndPoint *endPoint = [endPointList objectAtIndex:row];
-    return endPoint.endPointURL;
 }
 
 - (IBAction)addEndpoint:(id)sender {
@@ -116,6 +121,27 @@
     
 }
 
+/**
+- (IBAction)editEndpoint:(id)sender {
+    
+    NSLog(@"Yes, tryin to edit");
+    
+    if ([endPointListTableView selectedRow] >= 0) {
+        EndPoint *endPoint = [endPointList objectAtIndex:[endPointListTableView selectedRow]];
+        
+        if (!addEndPointController) {
+            NSLog(@"Creating controller");
+            addEndPointController = [[AddEndPointController alloc] initWithEndPoint:endPoint];
+            [addEndPointController setDelegate:self];
+        }
+        
+        NSLog(@"Display the window");
+        [addEndPointController showWindow:self];        
+    }
+    
+}
+**/
+
 - (IBAction)removeEndpoint:(id)sender {
     
     NSLog(@"Should remove something ..."); 
@@ -129,11 +155,13 @@
     
 }
 
--(void)addEndPoint:(EndPoint *)endPoint {
+-(void)addEndPointToArrayList:(EndPoint *)endPoint {
     
-    [endPointList addObject:endPoint];
-    [endPointListTableView reloadData];
-    [self saveEndPointList];
+    if (endPoint != nil) {
+        [endPointList addObject:endPoint];
+        [endPointListTableView reloadData];
+        [self saveEndPointList];
+    }
 }
 
 - (void)saveEndPointList {
@@ -181,6 +209,21 @@
     [super dealloc];
     [endPointList release];
     [addEndPointController release];
+}
+
+#pragma mark table view dataSource methods
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    
+    NSLog(@"%d endpoints listed", [endPointList count]);
+    return [endPointList count];
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
+            row:(NSInteger)row {
+    
+    EndPoint *endPoint = [endPointList objectAtIndex:row];
+    return endPoint.endPointURL;
 }
 
 @end

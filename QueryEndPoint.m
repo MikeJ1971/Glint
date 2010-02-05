@@ -47,22 +47,36 @@
 
     NSLog(@"Querying: %@", [endPoint endPointURL]);
     
-    NSURL *url = [NSURL URLWithString:[endPoint endPointURL]];
+    NSString *query = [NSString stringWithFormat:@"%@=%@", [endPoint queryParamName],
+                       [sparql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURL *url;
+    
+    if ([[endPoint httpMethod] isEqualToString:@"GET"]) {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [endPoint endPointURL], query]];
+    } else {
+        url = [NSURL URLWithString:[endPoint endPointURL]];
+    }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:60];
     
-    NSString *query = [NSString stringWithFormat:@"%@=%@", [endPoint queryParamName],
-                       [sparql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    if ([[endPoint httpMethod] isEqualToString:@"POST"]) {
+        NSData *data = [query dataUsingEncoding:NSUTF8StringEncoding];
+        [request setHTTPBody:data];
+        [request setValue:[NSString stringWithFormat:@"%d", 
+                           [query length]] forHTTPHeaderField:CONTENT_LENGTH];
+        [request setValue:APPLICATION_FORM forHTTPHeaderField:CONTENT_TYPE];  
+    }
     
-    NSData *data = [query dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPMethod:[endPoint httpMethod]];
-    [request setValue:[NSString stringWithFormat:@"%d", 
-                       [query length]] forHTTPHeaderField:CONTENT_LENGTH];
-    [request setValue:APPLICATION_FORM forHTTPHeaderField:CONTENT_TYPE];  
     [request setValue:accept forHTTPHeaderField:HEADER_ACCEPT];
-    [request setHTTPBody:data];
+    
+    NSLog(@"Querying %@, with a connection timeout of %@ seconds", [endPoint endPointURL],
+          [endPoint connectionTimeOut]);
+    
+    [request setTimeoutInterval:[[endPoint connectionTimeOut] floatValue]];
 
     
     // ----- Get the response

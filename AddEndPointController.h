@@ -16,6 +16,7 @@
     IBOutlet NSTextField *sparqlEndPointField;
     IBOutlet NSTextField *queryParameter;
     IBOutlet NSPopUpButton *httpMethodField;
+    IBOutlet NSTextField *connectionTimeOutField;
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *doneButton;
     
@@ -25,6 +26,7 @@
 @property(retain,nonatomic) IBOutlet NSTextField *sparqlEndPointField;
 @property(retain,nonatomic) IBOutlet NSTextField *queryParameter;
 @property(retain,nonatomic) IBOutlet NSPopUpButton *httpMethodField;
+@property(retain,nonatomic) IBOutlet NSTextField *connectionTimeOutField;
 @property(retain,nonatomic) IBOutlet NSButton *cancelButton;
 @property(retain,nonatomic) IBOutlet NSButton *doneButton;
 @property(retain,nonatomic) NSObject *delegate;

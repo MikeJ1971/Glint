@@ -18,6 +18,8 @@
     NSTextView *resultsTextView;                    // view for displaying results
     NSPopUpButton *resultsFormat;                   // list of formats to get results
     NSButton *runQueryButton;                       // fires the SPARQL query
+    NSProgressIndicator *progressIndicator;
+    NSTextField *urlIndicator ;
     
 //    NSString *selectedEndPoint;                     // selected endpoint to query
     
@@ -31,15 +33,14 @@
 @property(retain,nonatomic) IBOutlet NSTextView *resultsTextView;
 @property(retain,nonatomic) IBOutlet NSPopUpButton *resultsFormat;
 @property(retain,nonatomic) IBOutlet NSButton *runQueryButton;
+@property(retain,nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
+@property(retain,nonatomic) IBOutlet NSTextField *urlIndicator;
 
 - (IBAction)runquery:(id)sender;
 
-- (int)numberOfRowsInTableView:(NSTableView *)tableView;
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
-            row:(int)row;
-
 - (IBAction)addEndpoint:(id)sender;
+
+- (IBAction)editEndpoint:(id)sender;
 
 - (IBAction)removeEndpoint:(id)sender;
 

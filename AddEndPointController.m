@@ -14,24 +14,18 @@
 @synthesize sparqlEndPointField;
 @synthesize queryParameter;
 @synthesize httpMethodField;
+@synthesize connectionTimeOutField;
 @synthesize cancelButton;
 @synthesize doneButton;
 @synthesize delegate;
 
 - (id)init {
-    
-    NSLog(@"Initcalled!");
-    
+
     if (![super initWithWindowNibName:@"AddEndPoint"]) {
-        NSLog(@"It has all gone wrong");
         return nil;
     }
     
     return self;
-}
-
-- (void)windowDidLoad {
-    NSLog(@"Add Endpont window loaded");
 }
 
 - (IBAction)done:(id)sender {
@@ -40,24 +34,25 @@
     endPoint.endPointURL = [sparqlEndPointField stringValue];
     endPoint.httpMethod = [httpMethodField titleOfSelectedItem];
     endPoint.queryParamName = [queryParameter stringValue];
+    endPoint.connectionTimeOut = [connectionTimeOutField stringValue];
     
-    NSLog(@"%@ %@ %@", endPoint.endPointURL, endPoint.httpMethod, endPoint.queryParamName);
+    NSLog(@"%@", [sparqlEndPointField stringValue]);
+    NSLog(@"Time out here : %@", [connectionTimeOutField stringValue]);
+    NSLog(@"Time out here : %@", endPoint.connectionTimeOut);
     
-    [delegate addEndPoint:endPoint];
-    
-    NSLog(@"Done ... closing window");
+
+    [delegate addEndPointToArrayList:endPoint];
 
     [self close];
 }
 
 - (IBAction)cancel:(id)sender {
-    
-    NSLog(@"Cancel ... closing window");
+
     [self close];
 }
 
 - (void)dealloc {
-    NSLog(@"Dealloc called on AddEndPointController");
+
     [super dealloc];
 }
 

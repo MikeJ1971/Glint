@@ -14,11 +14,13 @@
 @synthesize endPointURL;
 @synthesize queryParamName;
 @synthesize httpMethod;
+@synthesize connectionTimeOut;
 
 - (id)initWithCoder:(NSCoder *)coder {
     self.endPointURL = [coder decodeObjectForKey:@"endPointURL"];
     self.queryParamName = [coder decodeObjectForKey:@"queryParamName"];
     self.httpMethod = [coder decodeObjectForKey:@"httpMethod"];
+    self.connectionTimeOut = [coder decodeObjectForKey:@"connectionTimeOut"];
     return self;
 }
 
@@ -26,6 +28,7 @@
     [coder encodeObject:endPointURL forKey:@"endPointURL"];
     [coder encodeObject:queryParamName forKey:@"queryParamName"];
     [coder encodeObject:httpMethod forKey:@"httpMethod"];
+    [coder encodeObject:connectionTimeOut forKey:@"connectionTimeOut"];
 }
 
 @end

@@ -87,7 +87,6 @@
 				DA49312C1116C94F005ECE56 /* AddEndPointController.h */,
 				DA4932571116F80A005ECE56 /* AddEndPointDelegate.h */,
 				DA49312D1116C94F005ECE56 /* AddEndPointController.m */,
-				DA4931311116CA64005ECE56 /* AddEndPoint.xib */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -143,6 +142,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA4931311116CA64005ECE56 /* AddEndPoint.xib */,
 				8D1107310486CEB800E47090 /* LinkedDataViewer-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
