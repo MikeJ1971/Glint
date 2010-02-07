@@ -16,6 +16,21 @@
 @synthesize httpMethod;
 @synthesize connectionTimeOut;
 
+- (id)init {
+    
+    if (![super init]) {
+        return nil;
+    }
+    
+    self.endPointURL = @"";
+    self.queryParamName = @"query";
+    self.httpMethod = @"POST";
+    self.connectionTimeOut = @"60";
+    
+    return self;
+    
+}
+
 - (id)initWithCoder:(NSCoder *)coder {
     self.endPointURL = [coder decodeObjectForKey:@"endPointURL"];
     self.queryParamName = [coder decodeObjectForKey:@"queryParamName"];

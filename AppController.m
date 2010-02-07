@@ -19,6 +19,7 @@
 #define HEADER_ACCEPT               @"accept"
 
 #define MAIN_WINDOW_MENU_ITEM_TAG   200
+#define EDIT_ENDPOINT_TAG           300
 
 @implementation AppController
 
@@ -115,54 +116,70 @@
         addEndPointController = [[AddEndPointController alloc] init];
         [addEndPointController setDelegate:self];
     }
-    
-    NSLog(@"Display the window");
+
     [addEndPointController showWindow:self];
-    
 }
 
-/**
+
 - (IBAction)editEndpoint:(id)sender {
     
-    NSLog(@"Yes, tryin to edit");
-    
+    // we should have a selected row
     if ([endPointListTableView selectedRow] >= 0) {
-        EndPoint *endPoint = [endPointList objectAtIndex:[endPointListTableView selectedRow]];
         
+        // create the controller if it doesn't exist
         if (!addEndPointController) {
-            NSLog(@"Creating controller");
-            addEndPointController = [[AddEndPointController alloc] initWithEndPoint:endPoint];
+            addEndPointController = [[AddEndPointController alloc] init];
             [addEndPointController setDelegate:self];
         }
         
-        NSLog(@"Display the window");
-        [addEndPointController showWindow:self];        
+        // in the controllrt set the endpoint and the index we need to upate
+        addEndPointController.endPoint =[endPointList objectAtIndex:[endPointListTableView selectedRow]];
+        addEndPointController.index = [endPointListTableView selectedRow];
+
+        // display the window
+        [addEndPointController showWindow:self];
+        //[addEndPointController updateForm];
     }
-    
 }
-**/
+
 
 - (IBAction)removeEndpoint:(id)sender {
     
-    NSLog(@"Should remove something ..."); 
-    
     if ([endPointListTableView selectedRow] >= 0) {
-        NSLog(@"selected row to remove: %d", [endPointListTableView selectedRow]);
         [endPointList removeObjectAtIndex:[endPointListTableView selectedRow]];
         [endPointListTableView reloadData];
         [self saveEndPointList];
     }
-    
 }
 
 -(void)addEndPointToArrayList:(EndPoint *)endPoint {
     
     if (endPoint != nil) {
+        
+        // add the new endpoint
         [endPointList addObject:endPoint];
         [endPointListTableView reloadData];
+        
+        // make sure the newly added endpoint is selected in the table
+        NSIndexSet *defaultIndex = [[NSIndexSet alloc] initWithIndex:[endPointList count] - 1];
+        [endPointListTableView selectRowIndexes:defaultIndex byExtendingSelection:NO];
+        [endPointListTableView scrollRowToVisible:[endPointList count] - 1];
+
+        // save the new list
         [self saveEndPointList];
     }
 }
+
+- (void)replaceEndpointInArrayWith:(EndPoint *)endPoint atIndex:(NSInteger)index {
+    
+    if (endPoint != nil) {
+        if (index >= 0) {
+            [endPointList replaceObjectAtIndex:index withObject:endPoint];
+            [self saveEndPointList];
+        }
+    }
+}
+
 
 - (void)saveEndPointList {
 
@@ -200,6 +217,10 @@
     // toggle the menu item for opening / closing the main window
     if ([item tag] == MAIN_WINDOW_MENU_ITEM_TAG) {
         return ![mainWindow isVisible];
+    }
+    
+    if ([item tag] == EDIT_ENDPOINT_TAG) {
+        return [endPointListTableView selectedRow] >= 0;
     }
 
     return TRUE;

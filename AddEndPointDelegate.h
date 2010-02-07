@@ -13,4 +13,6 @@
 
 - (void)addEndPointToArrayList:(EndPoint *)endPoint;
 
+- (void)replaceEndpointInArrayWith:(EndPoint *)endPoint atIndex:(NSInteger)index;
+
 @end
