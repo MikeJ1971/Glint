@@ -120,6 +120,8 @@
         return;
     }
 
+    
+    
     [progressIndicator startAnimation:self];
     //[urlIndicator setStringValue:[NSString stringWithFormat:@"Querying %@", [endPoint endPointURL]]];
 
@@ -189,6 +191,7 @@
         NSIndexSet *defaultIndex = [[NSIndexSet alloc] initWithIndex:[endPointList count] - 1];
         [endPointListTableView selectRowIndexes:defaultIndex byExtendingSelection:NO];
         [endPointListTableView scrollRowToVisible:[endPointList count] - 1];
+        [defaultIndex release];
 
         // save the new list
         [self saveEndPointList];

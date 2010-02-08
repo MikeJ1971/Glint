@@ -34,7 +34,7 @@
 #import <Cocoa/Cocoa.h>
 #import "AddEndPointController.h"
 
-@interface AppController : NSObject <NSTableViewDataSource, AddEndPointDelegate> {
+@interface AppController : NSObject <AddEndPointDelegate> {
 
     IBOutlet NSWindow *mainWindow;
 

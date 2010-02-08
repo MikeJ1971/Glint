@@ -33,7 +33,7 @@
  
 #import <Cocoa/Cocoa.h>
 
-@interface LinkedDataViewerAppDelegate : NSObject <NSApplicationDelegate> {
+@interface LinkedDataViewerAppDelegate : NSObject {
     NSWindow *window;
 }
 
