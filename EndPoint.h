@@ -29,6 +29,7 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
+// Author: Mike Jones (mike.a.jones@bristol.ac.uk)
 
 #import <Cocoa/Cocoa.h>
 
