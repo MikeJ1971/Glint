@@ -46,10 +46,13 @@
     NSProgressIndicator *progressIndicator;
     NSTextField *urlIndicator ;
     
-//    NSString *selectedEndPoint;                     // selected endpoint to query
-    
     NSMutableArray *endPointList;                   // registered endpoints - dataSource for table
 
+    //NSArray *queryTypeKeywords;
+    //NSArray *caseInsensitiveKeyWords;
+    NSArray *keywords;
+    NSCharacterSet *whitespaceSet;
+    
     AddEndPointController *addEndPointController;   // controller for adding endpoints
 }
 

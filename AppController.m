@@ -70,6 +70,14 @@
         endPointList = [[NSMutableArray alloc] init];
     }
 
+    // SPARQL Keywords
+    keywords = [[NSArray alloc] initWithObjects: @"SELECT", @"CONSTRUCT", @"DESCRIBE", @"ASK",
+                @"BASE", @"ORDER", @"BY", @"FROM", @"GRAPH", @"STR", @"isURI", @"PREFIX", @"LIMIT",
+                @"FROM NAMED", @"OPTIONAL", @"LANG", @"isIRI", @"OFFSET", @"WHERE", @"UNION",
+                @"LANGMATCHES", @"isLITERAL", @"DISTINCT", @"FILTER", @"DATATYPE", @"REGEX",
+                @"REDUCED", @"a", @"BOUND", @"true", @"sameTERM", @"false", nil];
+     
+     
     // display the list in the table
     [endPointListTableView setDataSource:self];
     
@@ -85,6 +93,9 @@
         [endPointListTableView scrollRowToVisible:0];
         [defaultIndex release];
     }
+    
+    whitespaceSet = [NSCharacterSet whitespaceCharacterSet];
+    [[queryTextView textStorage] setDelegate:self];
     
 }
 
@@ -159,7 +170,7 @@
             [addEndPointController setDelegate:self];
         }
         
-        // in the controllrt set the endpoint and the index we need to upate
+        // in the controller set the endpoint and the index we need to upate
         addEndPointController.endPoint =[endPointList objectAtIndex:[endPointListTableView selectedRow]];
         addEndPointController.index = [endPointListTableView selectedRow];
 
@@ -258,6 +269,8 @@
     [super dealloc];
     [endPointList release];
     [addEndPointController release];
+    //[caseInsensitiveKeywords release];
+    [whitespaceSet release];
 }
 
 #pragma mark table view dataSource methods
@@ -273,6 +286,72 @@
     
     EndPoint *endPoint = [endPointList objectAtIndex:row];
     return endPoint.endPointURL;
+}
+
+#pragma mark text storage delegate methods
+// just an initial attempt heavily borrowed from
+// http://www.cocoadev.com/index.pl?ImplementSyntaxHighlighting
+- (void)textStorageDidProcessEditing:(NSNotification *)notification {
+    
+    NSTextStorage *textStorage = [notification object];
+    NSString *string = [textStorage string];
+    NSRange area = [textStorage editedRange];
+    unsigned int length = [string length];
+    NSRange start, end;
+    NSCharacterSet *whiteSpaceSet;
+    unsigned int areamax = NSMaxRange(area);
+    NSRange found;
+    NSColor *blue = [NSColor blueColor];
+    NSString *word;
+    
+    // extend our range along word boundaries.
+    whiteSpaceSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    start = [string rangeOfCharacterFromSet:whiteSpaceSet
+                                    options:NSBackwardsSearch
+                                      range:NSMakeRange(0, area.location)];
+    if (start.location == NSNotFound) {
+        start.location = 0;
+    }  else {
+        start.location = NSMaxRange(start);
+    }
+    end = [string rangeOfCharacterFromSet:whiteSpaceSet
+                                  options:0
+                                    range:NSMakeRange(areamax, length - areamax)];
+    if (end.location == NSNotFound)
+        end.location = length;
+    area = NSMakeRange(start.location, end.location - start.location);
+    if (area.length == 0) return; // bail early
+    
+    // remove the old colors
+    [textStorage removeAttribute:NSForegroundColorAttributeName range:area];
+    
+    // add new colors
+    while (area.length) {
+        // find the next word
+        end = [string rangeOfCharacterFromSet:whiteSpaceSet
+                                      options:0
+                                        range:area];
+        if (end.location == NSNotFound) {
+            end = found = area;
+        } else {
+            found.length = end.location - area.location;
+            found.location = area.location;
+        }
+        word = [string substringWithRange:found];
+        
+        for (NSString *key in keywords) {
+            if ([word compare:key options:NSCaseInsensitiveSearch] == 0) {
+                [textStorage addAttribute:NSForegroundColorAttributeName value:blue range:found];
+                NSLog(@"Match!");
+                break;
+            }
+        }
+
+        // adjust our area
+        areamax = NSMaxRange(end);
+        area.length -= areamax - area.location;
+        area.location = areamax;
+    }
 }
 
 @end
