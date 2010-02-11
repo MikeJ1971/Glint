@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="804"/>
 			<integer value="783"/>
+			<integer value="804"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1912,7 +1912,7 @@
 																					<string>public.url</string>
 																				</object>
 																			</object>
-																			<string key="NSFrameSize">{540, 100}</string>
+																			<string key="NSFrameSize">{540, 140}</string>
 																			<reference key="NSSuperview" ref="520784530"/>
 																			<object class="NSTextContainer" key="NSTextContainer" id="1013359193">
 																				<object class="NSLayoutManager" key="NSLayoutManager">
@@ -2069,7 +2069,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 														<bool key="EncodedWithXMLCoder">YES</bool>
 														<object class="NSProgressIndicator" id="317138488">
 															<reference key="NSNextResponder" ref="394228092"/>
-															<int key="NSvFlags">1292</int>
+															<int key="NSvFlags">1325</int>
 															<object class="NSPSMatrix" key="NSDrawMatrix"/>
 															<string key="NSFrame">{{270, 108}, {16, 16}}</string>
 															<reference key="NSSuperview" ref="394228092"/>
@@ -2112,7 +2112,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 																					<string>public.url</string>
 																				</object>
 																			</object>
-																			<string key="NSFrameSize">{540, 30}</string>
+																			<string key="NSFrameSize">{540, 14}</string>
 																			<reference key="NSSuperview" ref="1020329864"/>
 																			<object class="NSTextContainer" key="NSTextContainer" id="829337244">
 																				<object class="NSLayoutManager" key="NSLayoutManager">
@@ -4353,8 +4353,8 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 						<reference key="object" ref="394228092"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="61845066"/>
 							<reference ref="317138488"/>
+							<reference ref="61845066"/>
 						</object>
 						<reference key="parent" ref="921696469"/>
 					</object>
@@ -4980,7 +4980,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{525, 802}, {197, 73}}</string>
-					<string>{{207, 783}, {566, 20}}</string>
+					<string>{{207, 960}, {566, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{74, 862}</string>
@@ -5005,9 +5005,9 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{106, 300}, {800, 500}}</string>
+					<string>{{407, 300}, {800, 500}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{106, 300}, {800, 500}}</string>
+					<string>{{407, 300}, {800, 500}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="YES"/>
@@ -5160,7 +5160,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{520, 690}, {224, 93}}</string>
+					<string>{{520, 867}, {224, 93}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
