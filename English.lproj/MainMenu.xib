@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="675"/>
 			<integer value="783"/>
+			<integer value="674"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1923,7 +1923,7 @@ RUZJWCByZGZzOiA8aHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIz4KUFJFRklYIHhz
 ZDogPGh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIz4KUFJFRklYIG93bDogPGh0dHA6Ly93
 d3cudzMub3JnLzIwMDIvMDcvb3dsIz4KUFJFRklYIHNrb3M6IDxodHRwOi8vd3d3LnczLm9yZy8yMDA0
 LzAyL3Nrb3MvY29yZSM+ClNFTEVDVCA/cyA/cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlU
-IDEwA</bytes>
+IDEwIA</bytes>
 																						</object>
 																						<object class="NSMutableArray" key="NSAttributes">
 																							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1946,7 +1946,7 @@ IDEwA</bytes>
 																										<double key="NSSize">12</double>
 																										<int key="NSfFlags">16</int>
 																									</object>
-																									<object class="NSParagraphStyle">
+																									<object class="NSParagraphStyle" id="442527728">
 																										<int key="NSAlignment">4</int>
 																										<nil key="NSTabStops"/>
 																									</object>
@@ -1956,21 +1956,23 @@ IDEwA</bytes>
 																								<bool key="EncodedWithXMLCoder">YES</bool>
 																								<object class="NSArray" key="dict.sortedKeys">
 																									<bool key="EncodedWithXMLCoder">YES</bool>
+																									<string>NSColor</string>
 																									<string>NSFont</string>
 																									<string>NSParagraphStyle</string>
 																								</object>
 																								<object class="NSMutableArray" key="dict.values">
 																									<bool key="EncodedWithXMLCoder">YES</bool>
-																									<reference ref="159659353"/>
-																									<object class="NSParagraphStyle">
-																										<int key="NSAlignment">4</int>
-																										<nil key="NSTabStops"/>
+																									<object class="NSColor">
+																										<int key="NSColorSpace">1</int>
+																										<bytes key="NSRGB">MCAwIDAAA</bytes>
 																									</object>
+																									<reference ref="159659353"/>
+																									<reference ref="442527728"/>
 																								</object>
 																							</object>
 																						</object>
 																						<object class="NSMutableData" key="NSAttributeInfo">
-																							<bytes key="NS.bytes">BgA0AQYALwEGACoBBgAnAQYALgEGAAEBCAABAQUABwEIAAMBBQADAQ</bytes>
+																							<bytes key="NS.bytes">BgA0AQYALwEGACoBBgAnAQYALgEGAAoBBQASAQUABAE</bytes>
 																						</object>
 																						<nil key="NSDelegate"/>
 																					</object>
@@ -1986,7 +1988,7 @@ IDEwA</bytes>
 																				<int key="NSTCFlags">1</int>
 																			</object>
 																			<object class="NSTextViewSharedData" key="NSSharedData">
-																				<int key="NSFlags">12131</int>
+																				<int key="NSFlags">12135</int>
 																				<int key="NSTextCheckingTypes">0</int>
 																				<nil key="NSMarkedAttributes"/>
 																				<reference key="NSBackgroundColor" ref="198803184"/>
@@ -5029,9 +5031,9 @@ IDEwA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{53, 300}, {800, 500}}</string>
+					<string>{{26, 300}, {800, 500}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{53, 300}, {800, 500}}</string>
+					<string>{{26, 300}, {800, 500}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="YES"/>
