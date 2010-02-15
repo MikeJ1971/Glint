@@ -19,6 +19,7 @@
 		DA4931321116CA64005ECE56 /* AddEndPoint.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4931311116CA64005ECE56 /* AddEndPoint.xib */; };
 		DAB1591E1115BEBF00709926 /* QueryEndPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB1591D1115BEBF00709926 /* QueryEndPoint.m */; };
 		DAC424001111CB9B00C7A382 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC423FF1111CB9B00C7A382 /* AppController.m */; };
+		DAEB4EA41129AA7600C33314 /* SyntaxHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */; };
 		DAF48E3711133DE200B0E35C /* EndPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF48E3611133DE200B0E35C /* EndPoint.m */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,8 @@
 		DAB1591D1115BEBF00709926 /* QueryEndPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryEndPoint.m; sourceTree = "<group>"; };
 		DAC423FE1111CB9B00C7A382 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		DAC423FF1111CB9B00C7A382 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		DAEB4EA21129AA7600C33314 /* SyntaxHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlighting.h; sourceTree = "<group>"; };
+		DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighting.m; sourceTree = "<group>"; };
 		DAF48E3511133DE200B0E35C /* EndPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndPoint.h; sourceTree = "<group>"; };
 		DAF48E3611133DE200B0E35C /* EndPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +92,8 @@
 				DA49312C1116C94F005ECE56 /* AddEndPointController.h */,
 				DA4932571116F80A005ECE56 /* AddEndPointDelegate.h */,
 				DA49312D1116C94F005ECE56 /* AddEndPointController.m */,
+				DAEB4EA21129AA7600C33314 /* SyntaxHighlighting.h */,
+				DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				DAF48E3711133DE200B0E35C /* EndPoint.m in Sources */,
 				DAB1591E1115BEBF00709926 /* QueryEndPoint.m in Sources */,
 				DA49312E1116C94F005ECE56 /* AddEndPointController.m in Sources */,
+				DAEB4EA41129AA7600C33314 /* SyntaxHighlighting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

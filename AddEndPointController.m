@@ -97,14 +97,7 @@
     endPoint = nil;
     index = -1;
 }
-/**
-- (void)cleanUp {
-    [endPoint release];
-    endPoint = nil;
-    index = -1;
-    [self close];
-}
-**/
+
 - (void)dealloc {
     [super dealloc];
 }

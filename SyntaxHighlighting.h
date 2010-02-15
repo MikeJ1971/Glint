@@ -27,52 +27,24 @@
  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 // Author: Mike Jones (mike.a.jones@bristol.ac.uk)
 
+
 #import <Cocoa/Cocoa.h>
-#import "AddEndPointController.h"
-#import "SyntaxHighlighting.h"
 
-@interface AppController : NSObject <AddEndPointDelegate> {
 
-    IBOutlet NSWindow *mainWindow;
+@interface SyntaxHighlighting : NSObject {
 
-    NSTableView *endPointListTableView;             // displays registered endpoints
-    NSTextView *queryTextView;                      // view for typing in the SPARQL query
-    NSTextView *resultsTextView;                    // view for displaying results
-    NSPopUpButton *resultsFormat;                   // list of formats to get results
-    NSButton *runQueryButton;                       // fires the SPARQL query
-    NSProgressIndicator *progressIndicator;
-    NSTextField *urlIndicator ;
+    NSString *queryType;
     
-    NSMutableArray *endPointList;                   // registered endpoints - dataSource for table
-
-    SyntaxHighlighting *syntaxHighlighting;
-    AddEndPointController *addEndPointController;   // controller for adding endpoints
+    NSArray *queryTypeKeywords;
+    NSArray *caseInsensitiveKeywords;
+    NSArray *caseSensitiveKeywords;
+    NSCharacterSet *whitespaceSet;
 }
 
-@property(retain,nonatomic) IBOutlet NSTableView *endPointListTableView;
-@property(retain,nonatomic) IBOutlet NSTextView *queryTextView;
-@property(retain,nonatomic) IBOutlet NSTextView *resultsTextView;
-@property(retain,nonatomic) IBOutlet NSPopUpButton *resultsFormat;
-@property(retain,nonatomic) IBOutlet NSButton *runQueryButton;
-@property(retain,nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
-@property(retain,nonatomic) IBOutlet NSTextField *urlIndicator;
-
-- (IBAction)runquery:(id)sender;
-
-- (IBAction)addEndpoint:(id)sender;
-
-- (IBAction)editEndpoint:(id)sender;
-
-- (IBAction)removeEndpoint:(id)sender;
-
-- (void)saveEndPointList;
-
-- (NSString *)storagePath;
-
-- (void)handleMainWindow:(id)sender;
+@property(copy, nonatomic) NSString *queryType;
 
 @end
