@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="675"/>
 			<integer value="783"/>
-			<integer value="674"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1912,7 +1912,7 @@
 																					<string>public.url</string>
 																				</object>
 																			</object>
-																			<string key="NSFrameSize">{540, 140}</string>
+																			<string key="NSFrameSize">{540, 160}</string>
 																			<reference key="NSSuperview" ref="520784530"/>
 																			<object class="NSTextContainer" key="NSTextContainer" id="1013359193">
 																				<object class="NSLayoutManager" key="NSLayoutManager">
@@ -1922,8 +1922,8 @@
 RUZJWCByZGZzOiA8aHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIz4KUFJFRklYIHhz
 ZDogPGh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIz4KUFJFRklYIG93bDogPGh0dHA6Ly93
 d3cudzMub3JnLzIwMDIvMDcvb3dsIz4KUFJFRklYIHNrb3M6IDxodHRwOi8vd3d3LnczLm9yZy8yMDA0
-LzAyL3Nrb3MvY29yZSM+ClNFTEVDVCBESVNUSU5DVCA/dHlwZQpXSEVSRSB7CiAgICA/dGhpbmcgYSA/
-dHlwZQp9CkxJTUlUIDEwA</bytes>
+LzAyL3Nrb3MvY29yZSM+ClNFTEVDVCA/cyA/cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlU
+IDEwA</bytes>
 																						</object>
 																						<object class="NSMutableArray" key="NSAttributes">
 																							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1941,12 +1941,12 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 																										<int key="NSColorSpace">1</int>
 																										<bytes key="NSRGB">MCAwIDEAA</bytes>
 																									</object>
-																									<object class="NSFont" id="475798012">
-																										<string key="NSName">Helvetica</string>
+																									<object class="NSFont" id="159659353">
+																										<string key="NSName">Monaco</string>
 																										<double key="NSSize">12</double>
 																										<int key="NSfFlags">16</int>
 																									</object>
-																									<object class="NSParagraphStyle" id="400676652">
+																									<object class="NSParagraphStyle">
 																										<int key="NSAlignment">4</int>
 																										<nil key="NSTabStops"/>
 																									</object>
@@ -1961,13 +1961,16 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 																								</object>
 																								<object class="NSMutableArray" key="dict.values">
 																									<bool key="EncodedWithXMLCoder">YES</bool>
-																									<reference ref="475798012"/>
-																									<reference ref="400676652"/>
+																									<reference ref="159659353"/>
+																									<object class="NSParagraphStyle">
+																										<int key="NSAlignment">4</int>
+																										<nil key="NSTabStops"/>
+																									</object>
 																								</object>
 																							</object>
 																						</object>
 																						<object class="NSMutableData" key="NSAttributeInfo">
-																							<bytes key="NS.bytes">BgA0AQYALwEGACoBBgAnAQYALgEGAAEBCAAHAQUADgEBAAkBBQADAQ</bytes>
+																							<bytes key="NS.bytes">BgA0AQYALwEGACoBBgAnAQYALgEGAAEBCAABAQUABwEIAAMBBQADAQ</bytes>
 																						</object>
 																						<nil key="NSDelegate"/>
 																					</object>
@@ -1983,7 +1986,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 																				<int key="NSTCFlags">1</int>
 																			</object>
 																			<object class="NSTextViewSharedData" key="NSSharedData">
-																				<int key="NSFlags">12263</int>
+																				<int key="NSFlags">12131</int>
 																				<int key="NSTextCheckingTypes">0</int>
 																				<nil key="NSMarkedAttributes"/>
 																				<reference key="NSBackgroundColor" ref="198803184"/>
@@ -2055,7 +2058,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 																	<reference key="NSSuperview" ref="404072707"/>
 																	<reference key="NSTarget" ref="404072707"/>
 																	<string key="NSAction">_doScroller:</string>
-																	<double key="NSCurValue">0.62857142857142856</double>
+																	<double key="NSCurValue">0.64732142857142849</double>
 																	<double key="NSPercent">0.99248120300751874</double>
 																</object>
 																<object class="NSScroller" id="1002016328">
@@ -2066,7 +2069,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 																	<int key="NSsFlags">1</int>
 																	<reference key="NSTarget" ref="404072707"/>
 																	<string key="NSAction">_doScroller:</string>
-																	<double key="NSCurValue">0.81481481481481477</double>
+																	<double key="NSCurValue">0.76296296296296262</double>
 																	<double key="NSPercent">0.94565218687057495</double>
 																</object>
 															</object>
@@ -2155,7 +2158,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 																				<int key="NSTCFlags">1</int>
 																			</object>
 																			<object class="NSTextViewSharedData" key="NSSharedData">
-																				<int key="NSFlags">12263</int>
+																				<int key="NSFlags">12259</int>
 																				<int key="NSTextCheckingTypes">0</int>
 																				<nil key="NSMarkedAttributes"/>
 																				<reference key="NSBackgroundColor" ref="198803184"/>
@@ -5001,7 +5004,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{525, 802}, {197, 73}}</string>
-					<string>{{207, 960}, {566, 20}}</string>
+					<string>{{207, 836}, {566, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{74, 862}</string>
@@ -5026,9 +5029,9 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{407, 300}, {800, 500}}</string>
+					<string>{{53, 300}, {800, 500}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{407, 300}, {800, 500}}</string>
+					<string>{{53, 300}, {800, 500}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="YES"/>
@@ -5181,7 +5184,7 @@ dHlwZQp9CkxJTUlUIDEwA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{520, 867}, {224, 93}}</string>
+					<string>{{520, 743}, {224, 93}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
