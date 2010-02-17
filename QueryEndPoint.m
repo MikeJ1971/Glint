@@ -124,4 +124,25 @@
     
 }
 
+#pragma mark delegate methods for the NSURLConnection
+
+// http://developer.apple.com/mac/library/DOCUMENTATION/Cocoa/Conceptual/URLLoadingSystem/Tasks/UsingNSURLConnection.html
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"didReceiveResponse called");
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    NSLog(@"didReceiveData called");
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"didFailWithError called");
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"connectionDidFinishLoading called");
+}
+
+
 @end
