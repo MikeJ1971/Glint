@@ -33,7 +33,6 @@
 
 #import "AppController.h"
 #import "EndPoint.h"
-#import "QueryEndPoint.h"
 #import "AddEndPointController.h"
 
 #define APPLICATION_FORM            @"application/x-www-form-urlencoded"
@@ -42,6 +41,11 @@
 #define CONTENT_LENGTH              @"Content-Length"
 #define CONTENT_TYPE                @"Content-Type"
 #define HEADER_ACCEPT               @"accept"
+#define RESULT_FORMAT_JSON          @"JSON";
+#define RESULT_FORMAT_XML           @"XML";
+
+
+
 
 #define MAIN_WINDOW_MENU_ITEM_TAG   200
 #define EDIT_ENDPOINT_TAG           300
@@ -103,6 +107,10 @@
 
 - (IBAction)runquery:(id)sender {
     
+    // indicate that we are doing something ...
+    [resultsTextView setString:@""];
+    [progressIndicator startAnimation:self];
+    
     // ----- Get the URL of the endpoint
 
     EndPoint *endPoint = nil;
@@ -111,8 +119,6 @@
         NSLog(@"selected row: %d", [endPointListTableView selectedRow]);
         endPoint = [endPointList objectAtIndex:[endPointListTableView selectedRow]];
     }
-    
-    NSLog(@"Querying: %@", [endPoint endPointURL]);
     
     // check that the endpoint has a value
     if ([[endPoint endPointURL] length] == 0) {
@@ -132,21 +138,61 @@
         // TODO provide visual feedback that an sparql is needed
         return;
     }
-
+  
+    // what format do we need the results?
+    
+    NSString *accept;
+    
+    if ([[resultsFormat titleOfSelectedItem] isEqualToString:@"JSON"]) {
+        accept = APPLICATION_RESULTS_JSON;
+    } else {
+        accept = APPLICATION_RESULTS_XML;
+    }    
     
     
-    [progressIndicator startAnimation:self];
-    //[urlIndicator setStringValue:[NSString stringWithFormat:@"Querying %@", [endPoint endPointURL]]];
-
-    QueryEndPoint *query = [[QueryEndPoint alloc] init];
-    NSString *results = [query queryEndPoint:endPoint withSparql:sparql 
-                               resultsFormat:[resultsFormat titleOfSelectedItem]];
-    [resultsTextView setString:results];
-    //[urlIndicator setStringValue:@""];
-    [progressIndicator stopAnimation:self];
+    // create the request
     
-    [query release];
+    NSLog(@"Querying: %@", [endPoint endPointURL]);
     
+    NSString *query = [NSString stringWithFormat:@"%@=%@", [endPoint queryParamName],
+                       [sparql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURL *url;
+    
+    if ([[endPoint httpMethod] isEqualToString:@"GET"]) {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", [endPoint endPointURL], query]];
+    } else {
+        url = [NSURL URLWithString:[endPoint endPointURL]];
+    }
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                       timeoutInterval:60];
+    
+    if ([[endPoint httpMethod] isEqualToString:@"POST"]) {
+        NSData *data = [query dataUsingEncoding:NSUTF8StringEncoding];
+        [request setHTTPBody:data];
+        [request setValue:[NSString stringWithFormat:@"%d", 
+                           [query length]] forHTTPHeaderField:CONTENT_LENGTH];
+        [request setValue:APPLICATION_FORM forHTTPHeaderField:CONTENT_TYPE];  
+    }
+    
+    [request setHTTPMethod:[endPoint httpMethod]];
+    [request setValue:accept forHTTPHeaderField:HEADER_ACCEPT];
+    
+    NSLog(@"Querying %@, with a connection timeout of %@ seconds", [endPoint endPointURL],
+          [endPoint connectionTimeOut]);
+    
+    [request setTimeoutInterval:[[endPoint connectionTimeOut] floatValue]];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if (connection) {
+        
+        receivedData = [[[NSMutableData alloc] init] retain];
+    } else {
+        NSLog(@"Connection was nil ... should send some kind of dialog");
+    }    
 }
 
 - (IBAction)addEndpoint:(id)sender {
@@ -282,6 +328,52 @@
     
     EndPoint *endPoint = [endPointList objectAtIndex:row];
     return endPoint.endPointURL;
+}
+
+
+#pragma mark delegate methods for the NSURLConnection
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    NSLog(@"Response code: %d", httpResponse.statusCode);
+    
+    [receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    
+    [receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    
+    [connection release];
+    [receivedData release];
+    receivedData = nil;
+    
+    // inform the user
+    NSLog(@"Connection failed: %@ %@", [error localizedDescription], 
+          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+    
+    [progressIndicator stopAnimation:self];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    NSLog(@"connectionDidFinishLoading called");
+    [connection release];
+    NSString *results = [[[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding] retain];
+    [resultsTextView setString:results];
+    
+    [[resultsTextView textStorage]setFont:[NSFont fontWithName:@"Monaco" size:12]];
+    
+    [results release];
+    [receivedData release];
+    receivedData = nil;
+    
+    [progressIndicator stopAnimation:self];
 }
 
 @end

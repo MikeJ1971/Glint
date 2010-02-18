@@ -51,6 +51,8 @@
 
     SyntaxHighlighting *syntaxHighlighting;
     AddEndPointController *addEndPointController;   // controller for adding endpoints
+    
+    NSMutableData *receivedData;
 }
 
 @property(retain,nonatomic) IBOutlet NSTableView *endPointListTableView;

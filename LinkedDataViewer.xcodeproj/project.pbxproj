@@ -18,7 +18,6 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		DA49312E1116C94F005ECE56 /* AddEndPointController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49312D1116C94F005ECE56 /* AddEndPointController.m */; };
 		DA4931321116CA64005ECE56 /* AddEndPoint.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4931311116CA64005ECE56 /* AddEndPoint.xib */; };
-		DAB1591E1115BEBF00709926 /* QueryEndPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB1591D1115BEBF00709926 /* QueryEndPoint.m */; };
 		DAC34945112B5C62005243DB /* linked-data-viewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = DAC34944112B5C62005243DB /* linked-data-viewer.icns */; };
 		DAC424001111CB9B00C7A382 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC423FF1111CB9B00C7A382 /* AppController.m */; };
 		DAEB4EA41129AA7600C33314 /* SyntaxHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */; };
@@ -58,8 +57,6 @@
 		DA49312D1116C94F005ECE56 /* AddEndPointController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEndPointController.m; sourceTree = "<group>"; };
 		DA4931311116CA64005ECE56 /* AddEndPoint.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEndPoint.xib; sourceTree = "<group>"; };
 		DA4932571116F80A005ECE56 /* AddEndPointDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEndPointDelegate.h; sourceTree = "<group>"; };
-		DAB1591C1115BEBF00709926 /* QueryEndPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryEndPoint.h; sourceTree = "<group>"; };
-		DAB1591D1115BEBF00709926 /* QueryEndPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryEndPoint.m; sourceTree = "<group>"; };
 		DAC34944112B5C62005243DB /* linked-data-viewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "linked-data-viewer.icns"; sourceTree = "<group>"; };
 		DAC423FE1111CB9B00C7A382 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		DAC423FF1111CB9B00C7A382 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
@@ -91,8 +88,6 @@
 				DAC423FF1111CB9B00C7A382 /* AppController.m */,
 				DAF48E3511133DE200B0E35C /* EndPoint.h */,
 				DAF48E3611133DE200B0E35C /* EndPoint.m */,
-				DAB1591C1115BEBF00709926 /* QueryEndPoint.h */,
-				DAB1591D1115BEBF00709926 /* QueryEndPoint.m */,
 				DA49312C1116C94F005ECE56 /* AddEndPointController.h */,
 				DA4932571116F80A005ECE56 /* AddEndPointDelegate.h */,
 				DA49312D1116C94F005ECE56 /* AddEndPointController.m */,
@@ -237,7 +232,6 @@
 				256AC3DA0F4B6AC300CF3369 /* LinkedDataViewerAppDelegate.m in Sources */,
 				DAC424001111CB9B00C7A382 /* AppController.m in Sources */,
 				DAF48E3711133DE200B0E35C /* EndPoint.m in Sources */,
-				DAB1591E1115BEBF00709926 /* QueryEndPoint.m in Sources */,
 				DA49312E1116C94F005ECE56 /* AddEndPointController.m in Sources */,
 				DAEB4EA41129AA7600C33314 /* SyntaxHighlighting.m in Sources */,
 			);
