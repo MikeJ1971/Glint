@@ -35,22 +35,31 @@
 #import "EndPoint.h"
 #import "AddEndPointController.h"
 
-#define APPLICATION_FORM            @"application/x-www-form-urlencoded"
-#define APPLICATION_RESULTS_JSON    @"application/sparql-results+json"
-#define APPLICATION_RESULTS_XML     @"application/sparql-results+xml"
-#define APPLICATION_RESULTS_RDF_XML @"application/rdf+xml"
-#define APPLICATION_RESULTS_N3      @"text/n3"
-#define CONTENT_LENGTH              @"Content-Length"
-#define CONTENT_TYPE                @"Content-Type"
-#define HEADER_ACCEPT               @"accept"
-#define RESULT_FORMAT_JSON          @"JSON"
-#define RESULT_FORMAT_XML           @"XML"
-#define RESULT_FORMAT_RDF_XML       @"RDF/XML"
-#define RESULT_FORMAT_N3            @"N3"
+#define CONTENT_LENGTH                  @"Content-Length"
+#define CONTENT_TYPE                    @"Content-Type"
+#define HEADER_ACCEPT                   @"accept"
+#define USER_AGENT                      @"User-Agent"
 
+#define APPLICATION_FORM                @"application/x-www-form-urlencoded"
+#define APPLICATION_RESULTS_JSON        @"application/sparql-results+json"
+#define APPLICATION_RESULTS_XML         @"application/sparql-results+xml"
+#define APPLICATION_RESULTS_RDF_XML     @"application/rdf+xml"
+#define APPLICATION_RESULTS_N3          @"text/n3"
+#define APPLICATION_RESULTS_TEXT        @"text/plain"
+//#define APPLICATION_RESULTS_TURTLE      @"text/turtle"
+#define APPLICATION_RESULTS_TURTLE      @"application/x-turtle"
 
-#define MAIN_WINDOW_MENU_ITEM_TAG   200
-#define EDIT_ENDPOINT_TAG           300
+#define RESULT_FORMAT_JSON              @"JSON"
+#define RESULT_FORMAT_XML               @"XML"
+#define RESULT_FORMAT_RDF_XML           @"RDF/XML"
+#define RESULT_FORMAT_N3                @"N3"
+#define RESULT_FORMAT_NTRIPLES          @"N-Triples"
+#define RESULT_FORMAT_TURTLE            @"Turtle"
+
+#define USER_AGENT_NAME                 @"LinkedDataViewer/0.4"
+
+#define MAIN_WINDOW_MENU_ITEM_TAG       200
+#define EDIT_ENDPOINT_TAG               300
 
 @implementation AppController
 
@@ -79,7 +88,8 @@
     // display the list in the table
     [endPointListTableView setDataSource:self];
     
-    constructArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_RDF_XML, RESULT_FORMAT_N3, nil];
+    constructArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_RDF_XML, RESULT_FORMAT_NTRIPLES, 
+                      RESULT_FORMAT_TURTLE, RESULT_FORMAT_N3, nil];
     selectArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_XML, RESULT_FORMAT_JSON, nil];
     
     return self;
@@ -109,12 +119,12 @@
     
     [resultsFormat removeAllItems];
     
-    if (syntaxHighlighting.queryType == @"SELECT") {
+    if (syntaxHighlighting.queryType == @"SELECT" || syntaxHighlighting.queryType == @"ASK") {
         NSLog(@"Observed a change to a select");
         [resultsFormat addItemsWithTitles:selectArray];
     }
     
-    if (syntaxHighlighting.queryType == @"CONSTRUCT") {
+    if (syntaxHighlighting.queryType == @"CONSTRUCT" || syntaxHighlighting.queryType == @"DESCRIBE") {
         NSLog(@"Observed a change to a construct");
         [resultsFormat addItemsWithTitles:constructArray];
     } 
@@ -177,9 +187,14 @@
         accept = APPLICATION_RESULTS_RDF_XML;
     } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_N3]) {
         accept = APPLICATION_RESULTS_N3;
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_NTRIPLES]) {
+        accept = APPLICATION_RESULTS_TEXT;
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TURTLE]) {
+        accept = APPLICATION_RESULTS_TURTLE;
+    } else {
+        accept = APPLICATION_RESULTS_TEXT;
     }
 
-    
     
     // create the request
     
@@ -203,16 +218,17 @@
         [request setHTTPBody:data];
         [request setValue:[NSString stringWithFormat:@"%d", 
                            [query length]] forHTTPHeaderField:CONTENT_LENGTH];
-        [request setValue:APPLICATION_FORM forHTTPHeaderField:CONTENT_TYPE];  
+        [request setValue:APPLICATION_FORM forHTTPHeaderField:CONTENT_TYPE];
     }
     
     [request setHTTPMethod:[endPoint httpMethod]];
     [request setValue:accept forHTTPHeaderField:HEADER_ACCEPT];
     
-    NSLog(@"Querying %@, with a connection timeout of %@ seconds", [endPoint endPointURL],
-          [endPoint connectionTimeOut]);
+    NSLog(@"Querying %@, with a connection timeout of %@ seconds, requesting content-type: %@",
+          [endPoint endPointURL], [endPoint connectionTimeOut], accept);
     
     [request setTimeoutInterval:[[endPoint connectionTimeOut] floatValue]];
+    [request setValue:USER_AGENT_NAME forHTTPHeaderField:USER_AGENT];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
@@ -221,7 +237,8 @@
         receivedData = [[[NSMutableData alloc] init] retain];
     } else {
         NSLog(@"Connection was nil ... should send some kind of dialog");
-    }    
+    }
+
 }
 
 - (IBAction)addEndpoint:(id)sender {
@@ -398,27 +415,20 @@
 
     NSLog(@"%d", responseCode);
     
-    if (responseCode >= 400) {
+    NSString *results = [[[NSString alloc] initWithData:receivedData
+                                               encoding:NSUTF8StringEncoding] autorelease];
+    
+    if (responseCode == 404) {
         
         NSAlert *alert;
         
-        if (responseCode == 404) {
-            alert = [NSAlert alertWithMessageText:@"Unable to query endpoint" 
-                                    defaultButton:nil alternateButton:nil otherButton:nil
-                        informativeTextWithFormat:@"The selected endpoint can't be found"];
-        } else {
-            alert = [NSAlert alertWithMessageText:@"Unable to query endpoint" 
-                                    defaultButton:nil alternateButton:nil otherButton:nil
-                        informativeTextWithFormat:@"A problem connecting to the endpoint!"];
-        }
-        
+        alert = [NSAlert alertWithMessageText:@"Unable to query endpoint" 
+                                defaultButton:nil alternateButton:nil otherButton:nil
+                    informativeTextWithFormat:@"The selected endpoint can't be found"];
         [alert runModal];
 
     } else {
-        NSString *results = [[[NSString alloc] initWithData:receivedData
-                                                   encoding:NSUTF8StringEncoding] autorelease];
         [resultsTextView setString:results];
-        //[results release];
         [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:12]];
     }
     
