@@ -141,7 +141,8 @@
                     if (![key isEqual:queryType]) {
                         NSLog(@"Changing query type");
                         //queryType = nil;
-                        queryType = key;
+                        [self setValue:key forKey:@"queryType"];
+                        //queryType = key;
                     }
                     
                     break;

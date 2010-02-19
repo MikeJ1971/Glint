@@ -53,6 +53,11 @@
     AddEndPointController *addEndPointController;   // controller for adding endpoints
     
     NSMutableData *receivedData;
+    
+    NSArray *constructArray;
+    NSArray *selectArray;
+    
+    int responseCode;
 }
 
 @property(retain,nonatomic) IBOutlet NSTableView *endPointListTableView;

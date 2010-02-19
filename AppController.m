@@ -36,15 +36,17 @@
 #import "AddEndPointController.h"
 
 #define APPLICATION_FORM            @"application/x-www-form-urlencoded"
-#define APPLICATION_RESULTS_JSON    @"application/sparql-results+json";
+#define APPLICATION_RESULTS_JSON    @"application/sparql-results+json"
 #define APPLICATION_RESULTS_XML     @"application/sparql-results+xml"
+#define APPLICATION_RESULTS_RDF_XML @"application/rdf+xml"
+#define APPLICATION_RESULTS_N3      @"text/n3"
 #define CONTENT_LENGTH              @"Content-Length"
 #define CONTENT_TYPE                @"Content-Type"
 #define HEADER_ACCEPT               @"accept"
-#define RESULT_FORMAT_JSON          @"JSON";
-#define RESULT_FORMAT_XML           @"XML";
-
-
+#define RESULT_FORMAT_JSON          @"JSON"
+#define RESULT_FORMAT_XML           @"XML"
+#define RESULT_FORMAT_RDF_XML       @"RDF/XML"
+#define RESULT_FORMAT_N3            @"N3"
 
 
 #define MAIN_WINDOW_MENU_ITEM_TAG   200
@@ -77,6 +79,9 @@
     // display the list in the table
     [endPointListTableView setDataSource:self];
     
+    constructArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_RDF_XML, RESULT_FORMAT_N3, nil];
+    selectArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_XML, RESULT_FORMAT_JSON, nil];
+    
     return self;
 }
 
@@ -92,7 +97,28 @@
     
     syntaxHighlighting = [[SyntaxHighlighting alloc] init];
     
+    [self addObserver:self forKeyPath:@"syntaxHighlighting.queryType" options:0 context:NULL];    
     [[queryTextView textStorage] setDelegate:syntaxHighlighting];
+    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
+                       context:(void *)context {
+    
+    NSLog(@"Well, something was registered!");
+    
+    [resultsFormat removeAllItems];
+    
+    if (syntaxHighlighting.queryType == @"SELECT") {
+        NSLog(@"Observed a change to a select");
+        [resultsFormat addItemsWithTitles:selectArray];
+    }
+    
+    if (syntaxHighlighting.queryType == @"CONSTRUCT") {
+        NSLog(@"Observed a change to a construct");
+        [resultsFormat addItemsWithTitles:constructArray];
+    } 
+    
     
 }
 
@@ -143,16 +169,19 @@
     
     NSString *accept;
     
-    if ([[resultsFormat titleOfSelectedItem] isEqualToString:@"JSON"]) {
+    if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_JSON]) {
         accept = APPLICATION_RESULTS_JSON;
-    } else {
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_XML]) {
         accept = APPLICATION_RESULTS_XML;
-    }    
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_RDF_XML]) {
+        accept = APPLICATION_RESULTS_RDF_XML;
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_N3]) {
+        accept = APPLICATION_RESULTS_N3;
+    }
+
     
     
     // create the request
-    
-    NSLog(@"Querying: %@", [endPoint endPointURL]);
     
     NSString *query = [NSString stringWithFormat:@"%@=%@", [endPoint queryParamName],
                        [sparql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -186,9 +215,9 @@
     [request setTimeoutInterval:[[endPoint connectionTimeOut] floatValue]];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+
     
     if (connection) {
-        
         receivedData = [[[NSMutableData alloc] init] retain];
     } else {
         NSLog(@"Connection was nil ... should send some kind of dialog");
@@ -337,8 +366,8 @@
     
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     
-    NSLog(@"Response code: %d", httpResponse.statusCode);
-    
+    responseCode = httpResponse.statusCode;
+
     [receivedData setLength:0];
 }
 
@@ -362,18 +391,39 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
+    [progressIndicator stopAnimation:self];
+    
     NSLog(@"connectionDidFinishLoading called");
     [connection release];
-    NSString *results = [[[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding] retain];
-    [resultsTextView setString:results];
+
+    NSLog(@"%d", responseCode);
     
-    [[resultsTextView textStorage]setFont:[NSFont fontWithName:@"Monaco" size:12]];
+    if (responseCode >= 400) {
+        
+        NSAlert *alert;
+        
+        if (responseCode == 404) {
+            alert = [NSAlert alertWithMessageText:@"Unable to query endpoint" 
+                                    defaultButton:nil alternateButton:nil otherButton:nil
+                        informativeTextWithFormat:@"The selected endpoint can't be found"];
+        } else {
+            alert = [NSAlert alertWithMessageText:@"Unable to query endpoint" 
+                                    defaultButton:nil alternateButton:nil otherButton:nil
+                        informativeTextWithFormat:@"A problem connecting to the endpoint!"];
+        }
+        
+        [alert runModal];
+
+    } else {
+        NSString *results = [[[NSString alloc] initWithData:receivedData
+                                                   encoding:NSUTF8StringEncoding] autorelease];
+        [resultsTextView setString:results];
+        //[results release];
+        [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:12]];
+    }
     
-    [results release];
     [receivedData release];
     receivedData = nil;
-    
-    [progressIndicator stopAnimation:self];
 }
 
 @end
