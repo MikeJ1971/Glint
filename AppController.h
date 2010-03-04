@@ -48,6 +48,8 @@
     NSButton *cancelQueryButton;                    // cancel the SPARQL query
     NSProgressIndicator *progressIndicator;         // indicates a query is in progress
     
+    NSScrollView *tableScrollView;
+    
     NSMutableArray *endPointList;                   // registered endpoints - dataSource for table
 
     SyntaxHighlighting *syntaxHighlighting;
@@ -71,6 +73,8 @@
 @property(retain,nonatomic) IBOutlet NSButton *runQueryButton;
 @property(retain,nonatomic) IBOutlet NSButton *cancelQueryButton;
 @property(retain,nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
+
+@property(retain,nonatomic) IBOutlet NSScrollView *tableScrollView;
 
 - (IBAction)runquery:(id)sender;
 

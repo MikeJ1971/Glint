@@ -49,6 +49,7 @@
 //#define APPLICATION_RESULTS_TURTLE      @"text/turtle"
 #define APPLICATION_RESULTS_TURTLE      @"application/x-turtle"
 
+#define RESULT_FORMAT_TABLE             @"Table View"
 #define RESULT_FORMAT_JSON              @"JSON"
 #define RESULT_FORMAT_XML               @"XML"
 #define RESULT_FORMAT_RDF_XML           @"RDF/XML"
@@ -72,6 +73,8 @@
 @synthesize cancelQueryButton;
 @synthesize progressIndicator;
 
+@synthesize tableScrollView;
+
 - (id)init {
     
     if (![super init]) {
@@ -91,7 +94,8 @@
     
     constructArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_RDF_XML, RESULT_FORMAT_NTRIPLES, 
                       RESULT_FORMAT_TURTLE, RESULT_FORMAT_N3, nil];
-    selectArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_XML, RESULT_FORMAT_JSON, nil];
+    selectArray = [[NSArray alloc] initWithObjects:RESULT_FORMAT_TABLE, RESULT_FORMAT_XML,
+                   RESULT_FORMAT_JSON, nil];
     
     return self;
 }
@@ -111,7 +115,7 @@
     [self addObserver:self forKeyPath:@"syntaxHighlighting.queryType" options:0 context:NULL];    
     [[queryTextView textStorage] setDelegate:syntaxHighlighting];
     [tabView selectTabViewItemWithIdentifier:@"sparql"];
-    
+    [tableScrollView setHidden:TRUE];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
@@ -187,7 +191,9 @@
     
     NSString *accept;
     
-    if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_JSON]) {
+    if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
+        accept = APPLICATION_RESULTS_XML;
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_JSON]) {
         accept = APPLICATION_RESULTS_JSON;
     } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_XML]) {
         accept = APPLICATION_RESULTS_XML;
@@ -450,9 +456,21 @@
         [alert runModal];
 
     } else {
-        [resultsTextView setString:results];
-        [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:10]];
-        [tabView selectTabViewItemWithIdentifier:@"results"];
+        
+        if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
+            [tableScrollView setHidden:FALSE];
+            
+        } else {
+            
+            [tableScrollView setHidden:TRUE];
+            
+            [resultsTextView setString:results];
+            [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:10]];
+          
+        }
+
+        [tabView selectTabViewItemWithIdentifier:@"results"];  
+
     }
     
     [runQueryButton setEnabled:TRUE];
