@@ -69,8 +69,8 @@
 @synthesize resultsTextView;
 @synthesize resultsFormat;
 @synthesize runQueryButton;
+@synthesize cancelQueryButton;
 @synthesize progressIndicator;
-@synthesize urlIndicator;
 
 - (id)init {
     
@@ -146,6 +146,10 @@
 - (IBAction)runquery:(id)sender {
     
     NSLog(@"Run the query");
+    
+    // disable the run button and enable cancel
+    [runQueryButton setEnabled:FALSE];
+    [cancelQueryButton setEnabled:TRUE];
     
     // indicate that we are doing something ...
     [resultsTextView setString:@""];
@@ -234,15 +238,27 @@
     [request setTimeoutInterval:[[endPoint connectionTimeOut] floatValue]];
     [request setValue:USER_AGENT_NAME forHTTPHeaderField:USER_AGENT];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    aConnection = nil;
+    aConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     
-    if (connection) {
+    if (aConnection) {
         receivedData = [[[NSMutableData alloc] init] retain];
     } else {
         NSLog(@"Connection was nil ... should send some kind of dialog");
     }
 
+}
+
+- (IBAction)cancelQuery:(id)sender {
+    
+    NSLog(@"Request to cancel query");
+    
+    [cancelQueryButton setEnabled:FALSE];
+    [aConnection cancel];
+    [aConnection release];
+    [progressIndicator stopAnimation:self];
+    [runQueryButton setEnabled:TRUE];
 }
 
 - (IBAction)addEndpoint:(id)sender {
@@ -412,6 +428,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
+    NSLog(@"connectionDidFinishLoading called");
+    
     [progressIndicator stopAnimation:self];
     
     NSLog(@"connectionDidFinishLoading called");
@@ -436,6 +454,9 @@
         [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:10]];
         [tabView selectTabViewItemWithIdentifier:@"results"];
     }
+    
+    [runQueryButton setEnabled:TRUE];
+    [cancelQueryButton setEnabled:FALSE];
     
     [receivedData release];
     receivedData = nil;
