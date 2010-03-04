@@ -40,6 +40,7 @@
     IBOutlet NSWindow *mainWindow;
 
     NSTableView *endPointListTableView;             // displays registered endpoints
+    NSTabView *tabView;                             // encapsulates SPARQL and results
     NSTextView *queryTextView;                      // view for typing in the SPARQL query
     NSTextView *resultsTextView;                    // view for displaying results
     NSPopUpButton *resultsFormat;                   // list of formats to get results
@@ -61,6 +62,7 @@
 }
 
 @property(retain,nonatomic) IBOutlet NSTableView *endPointListTableView;
+@property(retain,nonatomic) IBOutlet NSTabView *tabView;
 @property(retain,nonatomic) IBOutlet NSTextView *queryTextView;
 @property(retain,nonatomic) IBOutlet NSTextView *resultsTextView;
 @property(retain,nonatomic) IBOutlet NSPopUpButton *resultsFormat;

@@ -64,6 +64,7 @@
 @implementation AppController
 
 @synthesize endPointListTableView;
+@synthesize tabView;
 @synthesize queryTextView;
 @synthesize resultsTextView;
 @synthesize resultsFormat;
@@ -109,6 +110,7 @@
     
     [self addObserver:self forKeyPath:@"syntaxHighlighting.queryType" options:0 context:NULL];    
     [[queryTextView textStorage] setDelegate:syntaxHighlighting];
+    [tabView selectTabViewItemWithIdentifier:@"sparql"];
     
 }
 
@@ -142,6 +144,8 @@
 }
 
 - (IBAction)runquery:(id)sender {
+    
+    NSLog(@"Run the query");
     
     // indicate that we are doing something ...
     [resultsTextView setString:@""];
@@ -429,7 +433,8 @@
 
     } else {
         [resultsTextView setString:results];
-        [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:12]];
+        [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:10]];
+        [tabView selectTabViewItemWithIdentifier:@"results"];
     }
     
     [receivedData release];
