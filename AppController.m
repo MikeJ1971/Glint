@@ -74,6 +74,9 @@
 @synthesize progressIndicator;
 
 @synthesize tableScrollView;
+@synthesize tableView;
+
+//@synthesize resultsTableDelegate;
 
 - (id)init {
     
@@ -116,6 +119,10 @@
     [[queryTextView textStorage] setDelegate:syntaxHighlighting];
     [tabView selectTabViewItemWithIdentifier:@"sparql"];
     [tableScrollView setHidden:TRUE];
+    
+    resultsTableDelegate = [[ResultsTableDelegate alloc] init];
+    
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
@@ -145,6 +152,7 @@
     //[caseInsensitiveKeywords release];
     //[whitespaceSet release];
     [syntaxHighlighting release];
+    //[resultsTableDelegate release];
 }
 
 - (IBAction)runquery:(id)sender {
@@ -458,7 +466,16 @@
     } else {
         
         if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
+            [self parseData:receivedData];
             [tableScrollView setHidden:FALSE];
+            [tableView setDelegate:resultsTableDelegate];
+
+            [resultsTableDelegate updateColumns:tableView];
+            NSLog(@"Total -> %d", [[tableView tableColumns] count]);
+            NSLog(@"> %d", [resultsTableDelegate.columns count]);
+            NSLog(@"> %d", [resultsTableDelegate.results count]);
+             
+            //[tableView reloadData];
             
         } else {
             
@@ -479,5 +496,98 @@
     [receivedData release];
     receivedData = nil;
 }
+
+- (void)parseData:(NSData *)d {
+    
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:d];
+    [parser setDelegate:self];
+    [parser parse];
+    [parser release];
+}
+
+#pragma mark XML SAX delegate calls
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName 
+    attributes:(NSDictionary *)attributeDict {
+
+//    NSLog(@"Yes, an element: %@", elementName);
+    
+    if ([elementName isEqualToString:@"head"]) {
+        [columns release];
+        columns = [[NSMutableArray alloc] init];
+        //[resultRows release];
+        //resultRows = [[NSMutableArray alloc] init];
+    }
+
+    if ([elementName isEqualToString:@"result"]) {
+        //[resultRow release];
+        resultRow = [[NSMutableDictionary alloc] init];
+    }
+    
+    if ([elementName isEqualToString:@"binding"]) {
+        bindingInProgress = [[[NSString alloc] initWithString:[attributeDict objectForKey:@"name"]] retain];
+    }
+    
+    if ([elementName isEqualToString:@"variable"]) {
+        [columns addObject:[attributeDict objectForKey:@"name"]];
+//        NSLog(@"-- %@", [attributeDict objectForKey:@"name"]);
+    }
+    
+    if ([elementName isEqualToString:@"uri"] || [elementName isEqualToString:@"literal"] ||
+        [elementName isEqualToString:@"bnode"]) {
+        
+       textInProgress = [[NSMutableString alloc] init];
+        
+    }
+    
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName 
+  namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+
+    if ([elementName isEqualToString:@"uri"] || [elementName isEqualToString:@"literal"] ||
+        [elementName isEqualToString:@"bnode"]) {
+        
+//        NSLog(@"Value: %@", textInProgress);
+        
+        [resultRow setObject:textInProgress forKey:bindingInProgress];
+        
+        [textInProgress release];
+        textInProgress = nil;
+        
+        [bindingInProgress release];
+        bindingInProgress = nil;
+        
+    }
+    
+    if ([elementName isEqualToString:@"result"]) {
+        
+        NSLog(@"Here!!!!!");
+        
+        //[resultRows addObject:resultRow];
+        [resultsTableDelegate addResult:resultRow];
+        NSLog(@"row now -> %d", [resultsTableDelegate rowCount]);
+        [resultRow release];
+    }
+
+    if ([elementName isEqualToString:@"results"]) {
+        
+        //NSLog(@"Rows at this point: %d", [resultRows count]);
+        
+        [resultsTableDelegate setValue:columns forKey:@"columns"];
+        //[resultsTableDelegate setValue:resultRows forKey:@"results"];
+        
+        //[resultRows release];
+        
+        NSLog(@"? %d", [resultsTableDelegate.results count]);
+    }
+    
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    [textInProgress appendString:string];
+}
+
 
 @end

@@ -22,6 +22,7 @@
 		DAC424001111CB9B00C7A382 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC423FF1111CB9B00C7A382 /* AppController.m */; };
 		DAEB4EA41129AA7600C33314 /* SyntaxHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */; };
 		DAF48E3711133DE200B0E35C /* EndPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF48E3611133DE200B0E35C /* EndPoint.m */; };
+		DAF99379114475F8007ECAF3 /* ResultsTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF99378114475F8007ECAF3 /* ResultsTableDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,8 @@
 		DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighting.m; sourceTree = "<group>"; };
 		DAF48E3511133DE200B0E35C /* EndPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndPoint.h; sourceTree = "<group>"; };
 		DAF48E3611133DE200B0E35C /* EndPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndPoint.m; sourceTree = "<group>"; };
+		DAF99377114475F8007ECAF3 /* ResultsTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableDelegate.h; sourceTree = "<group>"; };
+		DAF99378114475F8007ECAF3 /* ResultsTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				DA49312D1116C94F005ECE56 /* AddEndPointController.m */,
 				DAEB4EA21129AA7600C33314 /* SyntaxHighlighting.h */,
 				DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */,
+				DAF99377114475F8007ECAF3 /* ResultsTableDelegate.h */,
+				DAF99378114475F8007ECAF3 /* ResultsTableDelegate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				DAF48E3711133DE200B0E35C /* EndPoint.m in Sources */,
 				DA49312E1116C94F005ECE56 /* AddEndPointController.m in Sources */,
 				DAEB4EA41129AA7600C33314 /* SyntaxHighlighting.m in Sources */,
+				DAF99379114475F8007ECAF3 /* ResultsTableDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

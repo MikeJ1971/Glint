@@ -34,6 +34,7 @@
 #import <Cocoa/Cocoa.h>
 #import "AddEndPointController.h"
 #import "SyntaxHighlighting.h"
+#import "ResultsTableDelegate.h"
 
 @interface AppController : NSObject <AddEndPointDelegate> {
 
@@ -49,6 +50,7 @@
     NSProgressIndicator *progressIndicator;         // indicates a query is in progress
     
     NSScrollView *tableScrollView;
+    NSTableView *tableView;
     
     NSMutableArray *endPointList;                   // registered endpoints - dataSource for table
 
@@ -63,6 +65,17 @@
     int responseCode;
     
     NSURLConnection *aConnection;
+    
+    NSMutableString *textInProgress;
+    NSString *bindingInProgress;
+    
+    NSMutableArray *columns;
+    NSMutableDictionary *resultRow;
+    NSMutableArray *resultRows;
+    
+    ResultsTableDelegate *resultsTableDelegate;
+    
+    
 }
 
 @property(retain,nonatomic) IBOutlet NSTableView *endPointListTableView;
@@ -75,6 +88,9 @@
 @property(retain,nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
 
 @property(retain,nonatomic) IBOutlet NSScrollView *tableScrollView;
+@property(retain,nonatomic) IBOutlet NSTableView *tableView;
+
+//@property(retain,nonatomic) ResultsTableDelegate *resultsTableDelegate;
 
 - (IBAction)runquery:(id)sender;
 
@@ -91,5 +107,7 @@
 - (NSString *)storagePath;
 
 - (void)handleMainWindow:(id)sender;
+
+- (void)parseData:(NSData *)d;
 
 @end
