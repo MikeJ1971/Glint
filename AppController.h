@@ -66,12 +66,12 @@
     
     NSURLConnection *aConnection;
     
-    NSMutableString *textInProgress;
-    NSString *bindingInProgress;
+//    NSMutableString *textInProgress;
+//    NSString *bindingInProgress;
     
-    NSMutableArray *columns;
-    NSMutableDictionary *resultRow;
-    NSMutableArray *resultRows;
+//    NSMutableArray *columns;
+//    NSMutableDictionary *resultRow;
+//    NSMutableArray *resultRows;
     
     ResultsTableDelegate *resultsTableDelegate;
     

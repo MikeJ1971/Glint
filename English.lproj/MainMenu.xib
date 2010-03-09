@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1050</int>
+		<int key="IBDocument.SystemTarget">1060</int>
 		<string key="IBDocument.SystemVersion">10C540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">740</string>
 		<string key="IBDocument.AppKitVersion">1038.25</string>
@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="371"/>
+			<integer value="808"/>
 			<integer value="783"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -1418,9 +1418,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
 					</object>
-					<object class="NSArray" key="NSToolbarIBAllowedItems">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-					</object>
+					<reference key="NSToolbarIBAllowedItems" ref="0"/>
 					<object class="NSMutableArray" key="NSToolbarIBDefaultItems">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 					</object>
@@ -1695,6 +1693,7 @@
 													<reference key="NSSuperview" ref="882672479"/>
 													<reference key="NSTarget" ref="882672479"/>
 													<string key="NSAction">_doScroller:</string>
+													<double key="NSCurValue">0.0020746887966804979</double>
 													<double key="NSPercent">0.99778270509977829</double>
 												</object>
 												<object class="NSScroller" id="693497835">
@@ -1894,7 +1893,7 @@ IDEwA</bytes>
 																					<nil key="NSDefaultParagraphStyle"/>
 																				</object>
 																				<int key="NSTVFlags">6</int>
-																				<string key="NSMaxSize">{516, 1e+07}</string>
+																				<string key="NSMaxSize">{950, 1e+07}</string>
 																				<string key="NSMinize">{223, 0}</string>
 																				<nil key="NSDelegate"/>
 																			</object>
@@ -1962,6 +1961,7 @@ IDEwA</bytes>
 																		<string key="NSTitle">Table View</string>
 																		<string key="NSKeyEquiv"/>
 																		<int key="NSMnemonicLoc">2147483647</int>
+																		<int key="NSState">1</int>
 																		<reference key="NSOnImage" ref="35465992"/>
 																		<reference key="NSMixedImage" ref="502551668"/>
 																		<string key="NSAction">_popUpItemAction:</string>
@@ -2108,7 +2108,7 @@ IDEwA</bytes>
 																						<string>public.url</string>
 																					</object>
 																				</object>
-																				<string key="NSFrameSize">{473, 133}</string>
+																				<string key="NSFrameSize">{473, 14}</string>
 																				<reference key="NSSuperview" ref="937490894"/>
 																				<object class="NSTextContainer" key="NSTextContainer" id="362745796">
 																					<object class="NSLayoutManager" key="NSLayoutManager">
@@ -2166,8 +2166,8 @@ IDEwA</bytes>
 																					<nil key="NSDefaultParagraphStyle"/>
 																				</object>
 																				<int key="NSTVFlags">6</int>
-																				<string key="NSMaxSize">{473, 1e+07}</string>
-																				<string key="NSMinize">{223, 133}</string>
+																				<string key="NSMaxSize">{950, 1e+07}</string>
+																				<string key="NSMinize">{223, 0}</string>
 																				<nil key="NSDelegate"/>
 																			</object>
 																		</object>
@@ -2220,7 +2220,7 @@ IDEwA</bytes>
 																			<bool key="EncodedWithXMLCoder">YES</bool>
 																			<object class="NSTableView" id="602678513">
 																				<reference key="NSNextResponder" ref="753833988"/>
-																				<int key="NSvFlags">-2147483392</int>
+																				<int key="NSvFlags">256</int>
 																				<string key="NSFrameSize">{475, 392}</string>
 																				<reference key="NSSuperview" ref="753833988"/>
 																				<bool key="NSEnabled">YES</bool>
@@ -2241,7 +2241,7 @@ IDEwA</bytes>
 																					<bool key="EncodedWithXMLCoder">YES</bool>
 																					<object class="NSTableColumn" id="225674200">
 																						<string key="NSIdentifier">default</string>
-																						<double key="NSWidth">101</double>
+																						<double key="NSWidth">472</double>
 																						<double key="NSMinWidth">40</double>
 																						<double key="NSMaxWidth">1000</double>
 																						<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -2272,7 +2272,7 @@ IDEwA</bytes>
 																				</object>
 																				<double key="NSIntercellSpacingWidth">3</double>
 																				<double key="NSIntercellSpacingHeight">2</double>
-																				<reference key="NSBackgroundColor" ref="198803184"/>
+																				<reference key="NSBackgroundColor" ref="243901865"/>
 																				<object class="NSColor" key="NSGridColor">
 																					<int key="NSColorSpace">6</int>
 																					<string key="NSCatalogName">System</string>
@@ -2283,10 +2283,10 @@ IDEwA</bytes>
 																					</object>
 																				</object>
 																				<double key="NSRowHeight">17</double>
-																				<int key="NSTvFlags">-700448768</int>
+																				<int key="NSTvFlags">-692027392</int>
 																				<reference key="NSDelegate"/>
 																				<reference key="NSDataSource"/>
-																				<int key="NSColumnAutoresizingStyle">4</int>
+																				<int key="NSColumnAutoresizingStyle">1</int>
 																				<int key="NSDraggingSourceMaskForLocal">15</int>
 																				<int key="NSDraggingSourceMaskForNonLocal">0</int>
 																				<bool key="NSAllowsTypeSelect">YES</bool>
@@ -2418,9 +2418,6 @@ IDEwA</bytes>
 			</object>
 			<object class="NSCustomObject" id="414729294">
 				<string key="NSClassName">AppController</string>
-			</object>
-			<object class="NSCustomObject" id="418777023">
-				<string key="NSClassName">ResultsTableDelegate</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -3289,14 +3286,6 @@ IDEwA</bytes>
 						<reference key="destination" ref="602678513"/>
 					</object>
 					<int key="connectionID">876</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">dataSource</string>
-						<reference key="source" ref="602678513"/>
-						<reference key="destination" ref="418777023"/>
-					</object>
-					<int key="connectionID">880</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4797,11 +4786,6 @@ IDEwA</bytes>
 						<reference key="object" ref="1065598587"/>
 						<reference key="parent" ref="147303779"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">879</int>
-						<reference key="object" ref="418777023"/>
-						<reference key="parent" ref="0"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -5122,7 +5106,6 @@ IDEwA</bytes>
 					<string>869.IBPluginDependency</string>
 					<string>872.IBPluginDependency</string>
 					<string>875.IBPluginDependency</string>
-					<string>879.IBPluginDependency</string>
 					<string>92.IBPluginDependency</string>
 					<string>92.ImportedFromIB2</string>
 				</object>
@@ -5257,9 +5240,9 @@ IDEwA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{60, 255}, {800, 500}}</string>
+					<string>{{665, 258}, {800, 500}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{60, 255}, {800, 500}}</string>
+					<string>{{665, 258}, {800, 500}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="YES"/>
@@ -5443,7 +5426,6 @@ IDEwA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 				</object>
 			</object>
@@ -5538,14 +5520,6 @@ IDEwA</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">LinkedDataViewerAppDelegate.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ResultsTableDelegate</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">ResultsTableDelegate.h</string>
 					</object>
 				</object>
 			</object>
@@ -6255,7 +6229,7 @@ IDEwA</bytes>
 		<int key="IBDocument.localizationMode">0</int>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<integer value="1050" key="NS.object.0"/>
+			<integer value="1060" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>

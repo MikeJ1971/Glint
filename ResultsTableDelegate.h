@@ -11,17 +11,14 @@
 
 @interface ResultsTableDelegate : NSObject {
 
-    NSArray *columns;
+    NSMutableArray *columns;
     NSMutableArray *results;
+    
+    NSMutableDictionary *row;
+    NSMutableString *textInProgress;
+    NSString *bindingInProgress;
 }
 
-@property(retain,nonatomic) NSArray *columns;
-@property(retain,nonatomic) NSMutableArray *results;
-
 - (void)updateColumns:(NSTableView *)aTableView;
-
-- (void)addResult:(NSDictionary *)aResult;
-
-- (NSInteger)rowCount;
 
 @end
