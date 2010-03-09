@@ -62,11 +62,12 @@
     for (NSString *identifier in columns) {
         NSTableColumn* tc = [[NSTableColumn alloc] initWithIdentifier:identifier];
         [[tc headerCell] setStringValue:identifier];
+        [tc setWidth:400];
         [aTableView addTableColumn:tc];
         [tc release];
     }
     
-    [aTableView setColumnAutoresizingStyle:NSTableViewFirstColumnOnlyAutoresizingStyle];
+    [temp release];
 }
 
 

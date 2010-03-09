@@ -467,9 +467,10 @@
         
         if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
             [self parseData:receivedData];
-            [tableScrollView setHidden:FALSE];
+            
             [tableView setDelegate:resultsTableDelegate];
             [tableView setDataSource:resultsTableDelegate];
+            [tableView setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
 
             [resultsTableDelegate updateColumns:tableView];
 //            NSLog(@"Total -> %d", [[tableView tableColumns] count]);
@@ -477,6 +478,7 @@
 //            NSLog(@"> %d", [resultsTableDelegate.results count]);
              
             [tableView reloadData];
+            [tableScrollView setHidden:FALSE];
             
         } else {
             

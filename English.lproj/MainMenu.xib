@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="808"/>
+			<integer value="371"/>
 			<integer value="783"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -2203,7 +2203,7 @@ IDEwA</bytes>
 																<string key="NSFrame">{{17, 17}, {477, 410}}</string>
 																<reference key="NSSuperview" ref="40320313"/>
 																<reference key="NSNextKeyView" ref="937490894"/>
-																<int key="NSsFlags">515</int>
+																<int key="NSsFlags">563</int>
 																<reference key="NSVScroller" ref="373735389"/>
 																<reference key="NSHScroller" ref="852031527"/>
 																<reference key="NSContentView" ref="937490894"/>
