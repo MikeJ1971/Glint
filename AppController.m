@@ -1,5 +1,7 @@
 /*
- Copyright (c) 2010, University of Bristol
+ Copyright (c) 2010, Mike Jones http://fairlypositive.com
+ Copyright (c) 2010, University of Bristol http://www.bristol.ac.uk
+ 
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -12,9 +14,9 @@
  this list of conditions and the following disclaimer in the documentation
  and/or other materials provided with the distribution.
  
- 3) Neither the name of the University of Bristol nor the names of its
- contributors may be used to endorse or promote products derived from this
- software without specific prior written permission.
+ 3) Neither the name of the author nor the names of its contributors may be used
+ to endorse or promote products derived from this software without specific
+ prior written permission.
  
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -158,6 +160,8 @@
 - (IBAction)runquery:(id)sender {
     
     NSLog(@"Run the query");
+    
+    startTime = [[NSDate alloc] init];
     
     // disable the run button and enable cancel
     [runQueryButton setEnabled:FALSE];
@@ -441,6 +445,15 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    endTime = [[NSDate alloc] init];
+    
+    NSTimeInterval diff = [endTime timeIntervalSinceDate:startTime];
+    //NSTimeInterval diff = [startTime timeIntervalSinceNow];
+    
+    NSLog(@"Time: %f", diff);
+    [startTime release];
+    [endTime release];
     
     NSLog(@"connectionDidFinishLoading called");
     

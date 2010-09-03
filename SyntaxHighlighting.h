@@ -1,5 +1,7 @@
 /*
- Copyright (c) 2010, University of Bristol
+ Copyright (c) 2010, Mike Jones http://fairlypositive.com
+ Copyright (c) 2010, University of Bristol http://www.bristol.ac.uk
+ 
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -12,9 +14,9 @@
  this list of conditions and the following disclaimer in the documentation
  and/or other materials provided with the distribution.
  
- 3) Neither the name of the University of Bristol nor the names of its
- contributors may be used to endorse or promote products derived from this
- software without specific prior written permission.
+ 3) Neither the name of the author nor the names of its contributors may be used
+ to endorse or promote products derived from this software without specific
+ prior written permission.
  
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -27,10 +29,9 @@
  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 // Author: Mike Jones (mike.a.jones@bristol.ac.uk)
-
 
 #import <Cocoa/Cocoa.h>
 
