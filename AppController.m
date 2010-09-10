@@ -411,7 +411,13 @@
             row:(NSInteger)row {
     
     EndPoint *endPoint = [endPointList objectAtIndex:row];
-    return endPoint.endPointURL;
+    
+    if (endPoint.name != nil) {
+        return endPoint.name;
+    } else {
+        return endPoint.endPointURL;
+    }
+
 }
 
 

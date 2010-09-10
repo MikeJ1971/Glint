@@ -38,6 +38,7 @@
 
 @implementation AddEndPointController
 
+@synthesize sparqlEndPointName;
 @synthesize sparqlEndPointField;
 @synthesize queryParameter;
 @synthesize httpMethodField;
@@ -63,7 +64,14 @@
     [super showWindow:sender];
 
     if (endPoint == nil) {
+        NSLog(@"The endpoint is nil");
         self.endPoint = [[EndPoint alloc] init];
+    }
+    
+    if (endPoint.name != nil) {
+        [sparqlEndPointName setStringValue:endPoint.name];
+    } else {
+        [sparqlEndPointName setStringValue:@""];
     }
     
     [sparqlEndPointField setStringValue:endPoint.endPointURL];
@@ -74,6 +82,7 @@
 
 - (IBAction)done:(id)sender {
 
+    endPoint.name = [sparqlEndPointName stringValue];
     endPoint.endPointURL = [sparqlEndPointField stringValue];
     endPoint.httpMethod = [httpMethodField titleOfSelectedItem];
     endPoint.queryParamName = [queryParameter stringValue];

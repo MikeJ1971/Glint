@@ -38,6 +38,7 @@
 
 @implementation EndPoint
 
+@synthesize name;
 @synthesize endPointURL;
 @synthesize queryParamName;
 @synthesize httpMethod;
@@ -49,6 +50,7 @@
         return nil;
     }
     
+    self.name = @"";
     self.endPointURL = @"";
     self.queryParamName = @"query";
     self.httpMethod = @"POST";
@@ -59,6 +61,7 @@
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
+    self.name = [coder decodeObjectForKey:@"name"];
     self.endPointURL = [coder decodeObjectForKey:@"endPointURL"];
     self.queryParamName = [coder decodeObjectForKey:@"queryParamName"];
     self.httpMethod = [coder decodeObjectForKey:@"httpMethod"];
@@ -67,6 +70,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:name forKey:@"name"];
     [coder encodeObject:endPointURL forKey:@"endPointURL"];
     [coder encodeObject:queryParamName forKey:@"queryParamName"];
     [coder encodeObject:httpMethod forKey:@"httpMethod"];

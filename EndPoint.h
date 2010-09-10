@@ -38,12 +38,14 @@
 
 @interface EndPoint : NSObject <NSCoding> {
 
+    NSString *name;
     NSString *endPointURL;
     NSString *queryParamName;
     NSString *httpMethod;
     NSString *connectionTimeOut;
 }
 
+@property(retain,nonatomic) NSString *name;
 @property(retain,nonatomic) NSString *endPointURL;
 @property(retain,nonatomic) NSString *queryParamName;
 @property(retain,nonatomic) NSString *httpMethod;

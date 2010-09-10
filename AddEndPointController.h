@@ -40,12 +40,13 @@
 
 @interface AddEndPointController : NSWindowController {
 
-    IBOutlet NSTextField *sparqlEndPointField;
-    IBOutlet NSTextField *queryParameter;
-    IBOutlet NSPopUpButton *httpMethodField;
-    IBOutlet NSTextField *connectionTimeOutField;
-    IBOutlet NSButton *cancelButton;
-    IBOutlet NSButton *doneButton;
+    NSTextField *sparqlEndPointName;
+    NSTextField *sparqlEndPointField;
+    NSTextField *queryParameter;
+    NSPopUpButton *httpMethodField;
+    NSTextField *connectionTimeOutField;
+    NSButton *cancelButton;
+    NSButton *doneButton;
     
     NSObject <AddEndPointDelegate> *delegate;
     
@@ -53,6 +54,7 @@
     NSInteger index;
 }
 
+@property(retain,nonatomic) IBOutlet NSTextField *sparqlEndPointName;
 @property(retain,nonatomic) IBOutlet NSTextField *sparqlEndPointField;
 @property(retain,nonatomic) IBOutlet NSTextField *queryParameter;
 @property(retain,nonatomic) IBOutlet NSPopUpButton *httpMethodField;
