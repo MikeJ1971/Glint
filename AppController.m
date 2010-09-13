@@ -37,33 +37,6 @@
 #import "EndPoint.h"
 #import "AddEndPointController.h"
 
-#define CONTENT_LENGTH                  @"Content-Length"
-#define CONTENT_TYPE                    @"Content-Type"
-#define HEADER_ACCEPT                   @"accept"
-#define USER_AGENT                      @"User-Agent"
-
-#define APPLICATION_FORM                @"application/x-www-form-urlencoded"
-#define APPLICATION_RESULTS_JSON        @"application/sparql-results+json"
-#define APPLICATION_RESULTS_XML         @"application/sparql-results+xml"
-#define APPLICATION_RESULTS_RDF_XML     @"application/rdf+xml"
-#define APPLICATION_RESULTS_N3          @"text/n3"
-#define APPLICATION_RESULTS_TEXT        @"text/plain"
-//#define APPLICATION_RESULTS_TURTLE      @"text/turtle"
-#define APPLICATION_RESULTS_TURTLE      @"application/x-turtle"
-
-#define RESULT_FORMAT_TABLE             @"Table View"
-#define RESULT_FORMAT_JSON              @"JSON"
-#define RESULT_FORMAT_XML               @"XML"
-#define RESULT_FORMAT_RDF_XML           @"RDF/XML"
-#define RESULT_FORMAT_N3                @"N3"
-#define RESULT_FORMAT_NTRIPLES          @"N-Triples"
-#define RESULT_FORMAT_TURTLE            @"Turtle"
-
-#define USER_AGENT_NAME                 @"LinkedDataViewer/0.4"
-
-#define MAIN_WINDOW_MENU_ITEM_TAG       200
-#define EDIT_ENDPOINT_TAG               300
-
 @implementation AppController
 
 @synthesize endPointListTableView;
@@ -155,6 +128,7 @@
     //[whitespaceSet release];
     [syntaxHighlighting release];
     //[resultsTableDelegate release];
+    [results release];
 }
 
 - (IBAction)runquery:(id)sender {
@@ -322,6 +296,40 @@
     }
 }
 
+- (IBAction)exportResults:(id)sender {
+    
+    NSLog(@"exportResults called");
+    
+    NSSavePanel *exportPanel = [NSSavePanel savePanel];
+    [exportPanel setCanCreateDirectories:YES];
+    [exportPanel setTitle:@"Export results"];
+
+    NSString *fileName;
+    
+    if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
+        fileName = @"untitled.csv";
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_JSON]) {
+        fileName = @"untitled.json";
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_N3] ||
+               [[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_NTRIPLES]) {
+        fileName = @"untitled.n3";
+    } else if([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_RDF_XML] ||
+              [[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_XML]) {
+        fileName = @"untitled.xml";
+    } else if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TURTLE]) {
+        fileName = @"untitled.ttl";
+    } else {
+        fileName = @"untiled.txt";
+    }
+
+    [exportPanel runModalForDirectory:nil file:fileName];
+    
+    [results writeToURL:[exportPanel URL] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    
+    NSLog(@"File: %@", [[exportPanel URL] description]);
+    
+}
+
 -(void)addEndPointToArrayList:(EndPoint *)endPoint {
     
     if (endPoint != nil) {
@@ -394,6 +402,10 @@
         return [endPointListTableView selectedRow] >= 0;
     }
 
+    if ([item tag] == EXPORT_RESULTS_TAG) {
+        return results != nil;
+    }
+    
     return TRUE;
 }
 
@@ -470,8 +482,9 @@
 
     NSLog(@"%d", responseCode);
     
-    NSString *results = [[[NSString alloc] initWithData:receivedData
-                                               encoding:NSUTF8StringEncoding] autorelease];
+    [results release];
+    results = [[[NSString alloc] initWithData:receivedData
+                                               encoding:NSUTF8StringEncoding] retain];
     
     if (responseCode == 404) {
         

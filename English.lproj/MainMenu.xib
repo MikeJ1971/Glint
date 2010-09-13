@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="783"/>
 			<integer value="841"/>
+			<integer value="783"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1263,6 +1263,25 @@
 									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="431543548">
+									<reference key="NSMenu" ref="641619104"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="1025598588">
+									<reference key="NSMenu" ref="641619104"/>
+									<string key="NSTitle">Export Results</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+									<int key="NSTag">400</int>
 								</object>
 							</object>
 						</object>
@@ -3289,6 +3308,14 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 					</object>
 					<int key="connectionID">876</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">exportResults:</string>
+						<reference key="source" ref="414729294"/>
+						<reference key="destination" ref="1025598588"/>
+					</object>
+					<int key="connectionID">882</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -4374,6 +4401,8 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 							<reference ref="368705818"/>
 							<reference ref="589192354"/>
 							<reference ref="450437133"/>
+							<reference ref="1025598588"/>
+							<reference ref="431543548"/>
 						</object>
 						<reference key="parent" ref="49375688"/>
 					</object>
@@ -4788,6 +4817,16 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 						<reference key="object" ref="902192190"/>
 						<reference key="parent" ref="147303779"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">881</int>
+						<reference key="object" ref="1025598588"/>
+						<reference key="parent" ref="641619104"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">883</int>
+						<reference key="object" ref="431543548"/>
+						<reference key="parent" ref="641619104"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -5108,6 +5147,8 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 					<string>869.IBPluginDependency</string>
 					<string>872.IBPluginDependency</string>
 					<string>875.IBPluginDependency</string>
+					<string>881.IBPluginDependency</string>
+					<string>883.IBPluginDependency</string>
 					<string>92.IBPluginDependency</string>
 					<string>92.ImportedFromIB2</string>
 				</object>
@@ -5242,9 +5283,9 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{175, 176}, {962, 577}}</string>
+					<string>{{1, 176}, {962, 577}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{175, 176}, {962, 577}}</string>
+					<string>{{1, 176}, {962, 577}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="YES"/>
@@ -5376,7 +5417,7 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{520, 743}, {224, 93}}</string>
+					<string>{{520, 713}, {224, 123}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5428,6 +5469,8 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 				</object>
 			</object>
@@ -5447,7 +5490,7 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">880</int>
+			<int key="maxID">883</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5462,12 +5505,14 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 							<string>addEndpoint:</string>
 							<string>cancelQuery:</string>
 							<string>editEndpoint:</string>
+							<string>exportResults:</string>
 							<string>handleMainWindow:</string>
 							<string>removeEndpoint:</string>
 							<string>runquery:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -5483,6 +5528,7 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 							<string>addEndpoint:</string>
 							<string>cancelQuery:</string>
 							<string>editEndpoint:</string>
+							<string>exportResults:</string>
 							<string>handleMainWindow:</string>
 							<string>removeEndpoint:</string>
 							<string>runquery:</string>
@@ -5499,6 +5545,10 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">editEndpoint:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">exportResults:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

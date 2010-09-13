@@ -38,6 +38,34 @@
 #import "SyntaxHighlighting.h"
 #import "ResultsTableDelegate.h"
 
+#define CONTENT_LENGTH                  @"Content-Length"
+#define CONTENT_TYPE                    @"Content-Type"
+#define HEADER_ACCEPT                   @"accept"
+#define USER_AGENT                      @"User-Agent"
+
+#define APPLICATION_FORM                @"application/x-www-form-urlencoded"
+#define APPLICATION_RESULTS_JSON        @"application/sparql-results+json"
+#define APPLICATION_RESULTS_XML         @"application/sparql-results+xml"
+#define APPLICATION_RESULTS_RDF_XML     @"application/rdf+xml"
+#define APPLICATION_RESULTS_N3          @"text/n3"
+#define APPLICATION_RESULTS_TEXT        @"text/plain"
+//#define APPLICATION_RESULTS_TURTLE      @"text/turtle"
+#define APPLICATION_RESULTS_TURTLE      @"application/x-turtle"
+
+#define RESULT_FORMAT_TABLE             @"Table View"
+#define RESULT_FORMAT_JSON              @"JSON"
+#define RESULT_FORMAT_XML               @"XML"
+#define RESULT_FORMAT_RDF_XML           @"RDF/XML"
+#define RESULT_FORMAT_N3                @"N3"
+#define RESULT_FORMAT_NTRIPLES          @"N-Triples"
+#define RESULT_FORMAT_TURTLE            @"Turtle"
+
+#define USER_AGENT_NAME                 @"LinkedDataViewer/0.4"
+
+#define MAIN_WINDOW_MENU_ITEM_TAG       200
+#define EDIT_ENDPOINT_TAG               300
+#define EXPORT_RESULTS_TAG              400
+
 @interface AppController : NSObject <AddEndPointDelegate> {
 
     IBOutlet NSWindow *mainWindow;
@@ -60,6 +88,7 @@
     AddEndPointController *addEndPointController;   // controller for adding endpoints
     
     NSMutableData *receivedData;
+    NSString *results;
     
     NSArray *constructArray;
     NSArray *selectArray;
@@ -107,6 +136,8 @@
 
 - (IBAction)removeEndpoint:(id)sender;
 
+- (IBAction)exportResults:(id)sender;
+
 - (void)saveEndPointList;
 
 - (NSString *)storagePath;
@@ -114,5 +145,6 @@
 - (void)handleMainWindow:(id)sender;
 
 - (void)parseData:(NSData *)d;
+
 
 @end
