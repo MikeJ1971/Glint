@@ -324,7 +324,14 @@
 
     [exportPanel runModalForDirectory:nil file:fileName];
     
-    [results writeToURL:[exportPanel URL] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
+        NSLog(@"Here ....");
+        [[resultsTableDelegate results] writeToURL:[exportPanel URL] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    } else {
+        [results writeToURL:[exportPanel URL] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    }
+    
+    
     
     NSLog(@"File: %@", [[exportPanel URL] description]);
     

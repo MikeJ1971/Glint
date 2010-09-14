@@ -173,7 +173,7 @@
 }
 
 
-#pragma mark XML SAX delegate calls
+#pragma mark TableView
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(NSInteger)rowIndex {
@@ -185,5 +185,37 @@
 
     return [results count];
 }
+
+- (NSString *)results {
+    
+    unsigned i,j,k;
+    NSMutableString *csv = [NSMutableString string];
+    
+    for (i = 0; i < [columns count]; i++) {
+        NSLog(@"In the loop");
+        [csv appendFormat:@"\"%@\"", [columns objectAtIndex:i]];
+        if (i != [columns count] -1) {
+            [csv appendString:@","];
+        }
+    }
+    
+    [csv appendString:@"\n"];
+    
+    for (j = 0; j < [results count]; j++) {
+        NSMutableDictionary *r = [results objectAtIndex:j];
+        for (k = 0; k < [columns count]; k++) {
+            [csv appendFormat:@"\"%@\"", [r objectForKey:[columns objectAtIndex:k]]];
+            if (k != [columns count] -1) {
+                [csv appendString:@","];
+            }
+        }
+        [csv appendString:@"\n"];
+    }
+    
+    return csv;
+}
+    
+    
+
 
 @end

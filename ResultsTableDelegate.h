@@ -48,4 +48,6 @@
 
 - (void)updateColumns:(NSTableView *)aTableView;
 
+- (NSString *)results;
+
 @end
