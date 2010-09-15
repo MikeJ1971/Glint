@@ -20,6 +20,9 @@
 		DA4931321116CA64005ECE56 /* AddEndPoint.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4931311116CA64005ECE56 /* AddEndPoint.xib */; };
 		DAC34945112B5C62005243DB /* linked-data-viewer.icns in Resources */ = {isa = PBXBuildFile; fileRef = DAC34944112B5C62005243DB /* linked-data-viewer.icns */; };
 		DAC424001111CB9B00C7A382 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC423FF1111CB9B00C7A382 /* AppController.m */; };
+		DAD82FB31241649100BAB9CB /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD82FB21241649100BAB9CB /* Sparkle.framework */; };
+		DAD82FC91241655800BAB9CB /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAD82FB21241649100BAB9CB /* Sparkle.framework */; };
+		DAD82FD31241694E00BAB9CB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = DAD82FD21241694E00BAB9CB /* dsa_pub.pem */; };
 		DAEB4EA41129AA7600C33314 /* SyntaxHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */; };
 		DAF48E3711133DE200B0E35C /* EndPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF48E3611133DE200B0E35C /* EndPoint.m */; };
 		DAF99379114475F8007ECAF3 /* ResultsTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF99378114475F8007ECAF3 /* ResultsTableDelegate.m */; };
@@ -33,6 +36,16 @@
 			dstSubfolderSpec = 10;
 			files = (
 				23598CEA11186A96002611BC /* BWToolkitFramework.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD82FC4124164DF00BAB9CB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DAD82FC91241655800BAB9CB /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +74,8 @@
 		DAC34944112B5C62005243DB /* linked-data-viewer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "linked-data-viewer.icns"; sourceTree = "<group>"; };
 		DAC423FE1111CB9B00C7A382 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		DAC423FF1111CB9B00C7A382 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		DAD82FB21241649100BAB9CB /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		DAD82FD21241694E00BAB9CB /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		DAEB4EA21129AA7600C33314 /* SyntaxHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlighting.h; sourceTree = "<group>"; };
 		DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighting.m; sourceTree = "<group>"; };
 		DAF48E3511133DE200B0E35C /* EndPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndPoint.h; sourceTree = "<group>"; };
@@ -76,6 +91,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				23598CB811186A82002611BC /* BWToolkitFramework.framework in Frameworks */,
+				DAD82FB31241649100BAB9CB /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +121,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAD82FB21241649100BAB9CB /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				23598CB711186A82002611BC /* BWToolkitFramework.framework */,
 			);
@@ -155,6 +172,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAD82FD21241694E00BAB9CB /* dsa_pub.pem */,
 				DA4931311116CA64005ECE56 /* AddEndPoint.xib */,
 				8D1107310486CEB800E47090 /* Glint-Info.plist */,
 				DAC34944112B5C62005243DB /* linked-data-viewer.icns */,
@@ -184,6 +202,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				23598CFC11186AAF002611BC /* CopyFiles */,
+				DAD82FC4124164DF00BAB9CB /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -230,6 +249,7 @@
 				23CD26A611204FE600D70C12 /* LICENSE in Resources */,
 				DAC34945112B5C62005243DB /* linked-data-viewer.icns in Resources */,
 				23614351112BE987008E23AD /* README in Resources */,
+				DAD82FD31241694E00BAB9CB /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +301,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Libraries/Cocoa/BWToolkit\"",
 					"\"$(SRCROOT)/ThirdParty/BWToolkit\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -303,6 +324,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Libraries/Cocoa/BWToolkit\"",
 					"\"$(SRCROOT)/ThirdParty/BWToolkit\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
