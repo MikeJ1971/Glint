@@ -31,11 +31,39 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-// Author: Mike Jones (mike.a.jones@bristol.ac.uk)
+// Author: Mike Jones (mike.a.jones@me.com)
 
 #import "AppController.h"
 #import "EndPoint.h"
 #import "AddEndPointController.h"
+
+#define CONTENT_LENGTH                  @"Content-Length"
+#define CONTENT_TYPE                    @"Content-Type"
+#define HEADER_ACCEPT                   @"accept"
+#define USER_AGENT                      @"User-Agent"
+
+#define APPLICATION_FORM                @"application/x-www-form-urlencoded"
+#define APPLICATION_RESULTS_JSON        @"application/sparql-results+json"
+#define APPLICATION_RESULTS_XML         @"application/sparql-results+xml"
+#define APPLICATION_RESULTS_RDF_XML     @"application/rdf+xml"
+#define APPLICATION_RESULTS_N3          @"text/n3"
+#define APPLICATION_RESULTS_TEXT        @"text/plain"
+#define APPLICATION_RESULTS_TURTLE      @"application/x-turtle"
+
+#define RESULT_FORMAT_TABLE             @"Table View"
+#define RESULT_FORMAT_JSON              @"JSON"
+#define RESULT_FORMAT_XML               @"XML"
+#define RESULT_FORMAT_RDF_XML           @"RDF/XML"
+#define RESULT_FORMAT_N3                @"N3"
+#define RESULT_FORMAT_NTRIPLES          @"N-Triples"
+#define RESULT_FORMAT_TURTLE            @"Turtle"
+
+#define CLIENT_NAME                     @"Glint"
+
+#define MAIN_WINDOW_MENU_ITEM_TAG       200
+#define EDIT_ENDPOINT_TAG               300
+#define EXPORT_RESULTS_TAG              400
+
 
 @implementation AppController
 
@@ -49,7 +77,7 @@
 @synthesize progressIndicator;
 
 @synthesize tableScrollView;
-@synthesize tableView;
+@synthesize resultsTableView;
 
 //@synthesize resultsTableDelegate;
 
@@ -228,7 +256,7 @@
           [endPoint endPointURL], [endPoint connectionTimeOut], accept);
     
     [request setTimeoutInterval:[[endPoint connectionTimeOut] floatValue]];
-    [request setValue:USER_AGENT_NAME forHTTPHeaderField:USER_AGENT];
+    [request setValue:[self userAgent] forHTTPHeaderField:USER_AGENT];
     
     aConnection = nil;
     aConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -385,10 +413,19 @@
 
     // calculate the paths ...
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	return [documentsDirectory stringByAppendingPathComponent:@"LinkedDataViewer.bin"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSString *folder = @"~/Library/Application Support/Glint";
+    folder = [folder stringByExpandingTildeInPath];
+    
+    if (![fileManager fileExistsAtPath:folder]) {
+        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES
+                                attributes:nil error:nil];
+    }
+   
+    NSString *dataFile = @"glint.data";
+    
+    return [folder stringByAppendingPathComponent:dataFile];
 }
 
 - (void)handleMainWindow:(id)sender {
@@ -507,16 +544,16 @@
         if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
             [self parseData:receivedData];
             
-            [tableView setDelegate:resultsTableDelegate];
-            [tableView setDataSource:resultsTableDelegate];
-            [tableView setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
+            [resultsTableView setDelegate:resultsTableDelegate];
+            [resultsTableView setDataSource:resultsTableDelegate];
+            [resultsTableView setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
 
-            [resultsTableDelegate updateColumns:tableView];
+            [resultsTableDelegate updateColumns:resultsTableView];
 //            NSLog(@"Total -> %d", [[tableView tableColumns] count]);
 //            NSLog(@"> %d", [resultsTableDelegate.columns count]);
 //            NSLog(@"> %d", [resultsTableDelegate.results count]);
              
-            [tableView reloadData];
+            [resultsTableView reloadData];
             [tableScrollView setHidden:FALSE];
             
         } else {
@@ -547,7 +584,13 @@
     [parser release];
 }
 
+- (NSString *) version {
+    return @"0.6";
+}
 
+- (NSString *) userAgent {
+    return [NSString stringWithFormat:@"%@/%@", CLIENT_NAME, [self version]];
+}
 
 
 @end

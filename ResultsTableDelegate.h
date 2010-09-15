@@ -31,12 +31,13 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-// Author: Mike Jones (mike.a.jones@bristol.ac.uk)
+// Author: Mike Jones (mike.a.jones@me.com)
 
 #import <Cocoa/Cocoa.h>
 
 
-@interface ResultsTableDelegate : NSObject {
+@interface ResultsTableDelegate : NSObject <NSTableViewDelegate, NSTableViewDataSource,
+    NSXMLParserDelegate> {
 
     NSMutableArray *columns;
     NSMutableArray *results;

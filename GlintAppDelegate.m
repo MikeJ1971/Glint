@@ -31,11 +31,11 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-// Author: Mike Jones (mike.a.jones@bristol.ac.uk)
+// Author: Mike Jones (mike.a.jones@me.com)
 
-#import "LinkedDataViewerAppDelegate.h"
+#import "GlintAppDelegate.h"
 
-@implementation LinkedDataViewerAppDelegate
+@implementation GlintAppDelegate
 
 @synthesize window;
 
