@@ -1411,7 +1411,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{332, 131}, {962, 577}}</string>
 				<int key="NSWTFlags">1954021376</int>
-				<string key="NSWindowTitle">Linked Data Viewer</string>
+				<string key="NSWindowTitle">Glint</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<object class="NSToolbar" key="NSViewClass" id="2410163">
 					<object class="NSMutableString" key="NSToolbarIdentifier">
@@ -5279,9 +5279,9 @@ cCA/bwpXSEVSRSB7CiAgICA/cyA/cCA/bwp9CkxJTUlUIDEwA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{432, 298}, {962, 577}}</string>
+					<string>{{417, 240}, {962, 577}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{432, 298}, {962, 577}}</string>
+					<string>{{417, 240}, {962, 577}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="YES"/>
