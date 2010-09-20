@@ -34,6 +34,7 @@
 // Author: Mike Jones (mike.a.jones@me.com)
 
 #import "AppController.h"
+#import "AppController+Private.h"
 #import "EndPoint.h"
 #import "AddEndPointController.h"
 
@@ -63,6 +64,8 @@
 #define MAIN_WINDOW_MENU_ITEM_TAG       200
 #define EDIT_ENDPOINT_TAG               300
 #define EXPORT_RESULTS_TAG              400
+
+#define TAB_VIEW_RESULTS                @"results"
 
 
 @implementation AppController
@@ -530,43 +533,12 @@
     results = [[[NSString alloc] initWithData:receivedData
                                                encoding:NSUTF8StringEncoding] retain];
     
-    if (responseCode == 404) {
-        
-        NSAlert *alert;
-        
-        alert = [NSAlert alertWithMessageText:@"Unable to query endpoint" 
-                                defaultButton:nil alternateButton:nil otherButton:nil
-                    informativeTextWithFormat:@"The selected endpoint can't be found"];
-        [alert runModal];
-
+    if (responseCode == 400) {
+        [self handle400];
+    } else if (responseCode == 404) {
+        [self handle404];
     } else {
-        
-        if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
-            [self parseData:receivedData];
-            
-            [resultsTableView setDelegate:resultsTableDelegate];
-            [resultsTableView setDataSource:resultsTableDelegate];
-            [resultsTableView setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
-
-            [resultsTableDelegate updateColumns:resultsTableView];
-//            NSLog(@"Total -> %d", [[tableView tableColumns] count]);
-//            NSLog(@"> %d", [resultsTableDelegate.columns count]);
-//            NSLog(@"> %d", [resultsTableDelegate.results count]);
-             
-            [resultsTableView reloadData];
-            [tableScrollView setHidden:FALSE];
-            
-        } else {
-            
-            [tableScrollView setHidden:TRUE];
-            
-            [resultsTextView setString:results];
-            [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:10]];
-          
-        }
-
-        [tabView selectTabViewItemWithIdentifier:@"results"];  
-
+        [self handle200];
     }
     
     [runQueryButton setEnabled:TRUE];
@@ -574,6 +546,53 @@
     
     [receivedData release];
     receivedData = nil;
+}
+
+
+- (NSString *) version {
+    return @"0.6";
+}
+
+- (NSString *) userAgent {
+    return [NSString stringWithFormat:@"%@/%@", CLIENT_NAME, [self version]];
+}
+
+
+
+
+@end
+
+@implementation AppController(Private)
+
+
+
+
+- (void)handle200 {
+
+    if ([[resultsFormat titleOfSelectedItem] isEqualToString:RESULT_FORMAT_TABLE]) {
+        [self displayResultsTable];
+    } else {
+        [self displayResults];
+    }    
+}
+
+- (void)handle400 {
+    [self displayResults];
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Bad request!"
+                                     defaultButton:nil alternateButton:nil 
+                                       otherButton:nil
+                         informativeTextWithFormat:@"The server returned the response code: 400 (Bad Request). This might have been caused by a syntax error in the SPARQL query."];
+    [alert runModal];
+    
+}
+
+- (void)handle404 {
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:@"SPARQL Endpoint not found!" 
+                                     defaultButton:nil alternateButton:nil otherButton:nil
+                         informativeTextWithFormat:@"The server returned the response code: 404 (Not Found). Please check the URL."];
+    [alert runModal];
 }
 
 - (void)parseData:(NSData *)d {
@@ -584,13 +603,24 @@
     [parser release];
 }
 
-- (NSString *) version {
-    return @"0.6";
+- (void)displayResults {
+
+    [tableScrollView setHidden:TRUE];    
+    [resultsTextView setString:results];
+    [[resultsTextView textStorage] setFont:[NSFont fontWithName:@"Monaco" size:10]];
+    [tabView selectTabViewItemWithIdentifier:TAB_VIEW_RESULTS];
 }
 
-- (NSString *) userAgent {
-    return [NSString stringWithFormat:@"%@/%@", CLIENT_NAME, [self version]];
+- (void)displayResultsTable {
+    
+    [self parseData:receivedData];
+    [resultsTableView setDelegate:resultsTableDelegate];
+    [resultsTableView setDataSource:resultsTableDelegate];
+    [resultsTableView setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
+    [resultsTableDelegate updateColumns:resultsTableView];
+    [resultsTableView reloadData];
+    [tableScrollView setHidden:FALSE];
+    [tabView selectTabViewItemWithIdentifier:TAB_VIEW_RESULTS];
 }
-
 
 @end

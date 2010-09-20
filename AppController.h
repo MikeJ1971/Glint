@@ -107,6 +107,5 @@
 - (void)saveEndPointList;
 - (NSString *)storagePath;
 - (void)handleMainWindow:(id)sender;
-- (void)parseData:(NSData *)d;
 
 @end

@@ -76,6 +76,7 @@
 		DAC423FF1111CB9B00C7A382 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		DAD82FB21241649100BAB9CB /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		DAD82FD21241694E00BAB9CB /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		DAE72DC51247A57D007CB85D /* AppController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Private.h"; sourceTree = "<group>"; };
 		DAEB4EA21129AA7600C33314 /* SyntaxHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlighting.h; sourceTree = "<group>"; };
 		DAEB4EA31129AA7600C33314 /* SyntaxHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighting.m; sourceTree = "<group>"; };
 		DAF48E3511133DE200B0E35C /* EndPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndPoint.h; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 				256AC3D80F4B6AC300CF3369 /* GlintAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* GlintAppDelegate.m */,
 				DAC423FE1111CB9B00C7A382 /* AppController.h */,
+				DAE72DC51247A57D007CB85D /* AppController+Private.h */,
 				DAC423FF1111CB9B00C7A382 /* AppController.m */,
 				DAF48E3511133DE200B0E35C /* EndPoint.h */,
 				DAF48E3611133DE200B0E35C /* EndPoint.m */,
