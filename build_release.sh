@@ -45,6 +45,10 @@ if [ $? != 0 ]; then
 	exit
 fi
 
+filesize=`stat -f %z $build_folder/Release/$project.app`
+
+echo "******************************** $filesize"
+
 # make sure we have a build folder
 if [ ! -d $dmg_folder ]; then
 	mkdir -p $dmg_folder
