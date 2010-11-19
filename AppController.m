@@ -497,16 +497,24 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    
+
+	// inform the user
+    NSLog(@"Connection failed: %@ %@", [error localizedDescription], 
+          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+	
     [connection release];
     [receivedData release];
     receivedData = nil;
     
-    // inform the user
-    NSLog(@"Connection failed: %@ %@", [error localizedDescription], 
-          [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
-    
     [progressIndicator stopAnimation:self];
+	[runQueryButton setEnabled:TRUE];
+    [cancelQueryButton setEnabled:FALSE];
+	
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Connection Error!"
+                                     defaultButton:nil alternateButton:nil 
+                                       otherButton:nil
+                         informativeTextWithFormat:[error localizedDescription]];
+    [alert runModal];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
