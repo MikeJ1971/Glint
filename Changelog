@@ -1,0 +1,3 @@
+* Added non-functional save button for saving queries
+* changed build settings Framework Search Path from "$(SRCROOT)/../../../Libraries/Cocoa/BWToolkit" to "$(SRCROOT)/../../../Library/Cocoa/BWToolkit"
+* 
