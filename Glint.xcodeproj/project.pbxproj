@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0113FC9C15F54B5500EC514A /* Changelog in Resources */ = {isa = PBXBuildFile; fileRef = 0113FC9B15F54B5500EC514A /* Changelog */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		23598CB811186A82002611BC /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23598CB711186A82002611BC /* BWToolkitFramework.framework */; };
 		23598CEA11186A96002611BC /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23598CB711186A82002611BC /* BWToolkitFramework.framework */; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0113FC9B15F54B5500EC514A /* Changelog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog; sourceTree = "<group>"; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -156,6 +158,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				0113FC9B15F54B5500EC514A /* Changelog */,
 				23CD26A511204FE600D70C12 /* LICENSE */,
 				23614350112BE987008E23AD /* README */,
 			);
@@ -255,6 +258,7 @@
 				DAC34945112B5C62005243DB /* linked-data-viewer.icns in Resources */,
 				23614351112BE987008E23AD /* README in Resources */,
 				DAD82FD31241694E00BAB9CB /* dsa_pub.pem in Resources */,
+				0113FC9C15F54B5500EC514A /* Changelog in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +308,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../Libraries/Cocoa/BWToolkit\"",
+					"\"$(SRCROOT)/../../../Library/Cocoa/BWToolkit\"",
 					"\"$(SRCROOT)/ThirdParty/BWToolkit\"",
 					"\"$(SRCROOT)\"",
 				);
@@ -326,7 +330,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../Libraries/Cocoa/BWToolkit\"",
+					"\"$(SRCROOT)/../../../Library/Cocoa/BWToolkit\"",
 					"\"$(SRCROOT)/ThirdParty/BWToolkit\"",
 					"\"$(SRCROOT)\"",
 				);
