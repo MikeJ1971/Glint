@@ -181,7 +181,7 @@
     EndPoint *endPoint = nil;
     
     if ([endPointListTableView selectedRow] >= 0) {
-        NSLog(@"selected row: %d", [endPointListTableView selectedRow]);
+        NSLog(@"selected row: %ld", [endPointListTableView selectedRow]);
         endPoint = [endPointList objectAtIndex:[endPointListTableView selectedRow]];
     }
     
@@ -229,8 +229,12 @@
     
     // create the request
     
-    NSString *query = [NSString stringWithFormat:@"%@=%@", [endPoint queryParamName],
+    NSMutableString *query = [NSMutableString stringWithFormat:@"%@=%@", [endPoint queryParamName],
                        [sparql stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    [query replaceOccurrencesOfString:@"&" withString:@"%26" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [query length])];
+    
+    NSLog(@"Query: %@", query);
     
     NSURL *url;
     
@@ -462,7 +466,7 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     
-    NSLog(@"%d endpoints listed", [endPointList count]);
+    NSLog(@"%lu endpoints listed", [endPointList count]);
     return [endPointList count];
 }
 

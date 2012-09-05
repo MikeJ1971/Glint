@@ -1,0 +1,7 @@
+changes
+0.7 alpha 2
+* Changing default query text to a preference that can be changed
+* add support for saving to .rq sparql query format
+0.7 alpha 1
+* Added non-functional save button for saving queries
+* changed build settings Framework Search Path from "$(SRCROOT)/../../../Libraries/Cocoa/BWToolkit" to "$(SRCROOT)/../../../Library/Cocoa/BWToolkit"
